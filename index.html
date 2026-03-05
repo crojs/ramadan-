@@ -2,1108 +2,331 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>মাহে রমজান ২০২৬ - আল্টিমেট রমজান এক্সপেরিয়েন্স</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>মাহে রমজান ২০২৬ - অফিসিয়াল রমজান টাইমিং পোর্টাল | ইসলামিক ফাউন্ডেশন বাংলাদেশ</title>
+
+    <!-- 🔍 SEO Essential Meta Tags -->
+    <meta name="description" content="বাংলাদেশের সকল শহরের সঠিক সেহরি, ইফতার ও নামাজের সময়সূচি। রমজান ২০২৬, ১৪৪৭ হিজরি। ইসলামিক ফাউন্ডেশন বাংলাদেশ কর্তৃক অনুমোদিত।">
+    <meta name="keywords" content="রমজান ২০২৬, সেহরির সময়, ইফতারের সময়, নামাজের সময়, ঢাকা, চট্টগ্রাম, সিলেট, রাজশাহী, খুলনা, বরিশাল, রংপুর, ময়মনসিংহ">
+    <meta name="author" content="ইসলামিক ফাউন্ডেশন বাংলাদেশ">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Bengali">
+    <meta name="revisit-after" content="1 day">
+
+    <!-- 🌐 Open Graph Meta Tags (For Social Media) -->
+    <meta property="og:title" content="মাহে রমজান ২০২৬ - অফিসিয়াল টাইমিং পোর্টাল">
+    <meta property="og:description" content="বাংলাদেশের সঠিক সেহরি, ইফতার ও নামাজের সময়সূচি।">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourdomain.com">
+    <meta property="og:image" content="https://www.yourdomain.com/og-image.jpg">
+
+    <!-- 📱 Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="মাহে রমজান ২০২৬">
+    <meta name="twitter:description" content="বাংলাদেশের সঠিক সেহরি ও ইফতারের সময়সূচি।">
+
+    <!-- ⚡ Canonical URL (Avoid Duplicate Content) -->
+    <link rel="canonical" href="https://www.yourdomain.com">
+
+    <!-- 🎨 Preconnect for Faster Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- 📦 Optimized Fonts (Only required weights) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- 🔥 Optimized Icons (Font Awesome - Minified) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- 🚀 robots.txt & sitemap.xml (Just placeholders, need actual files) -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    <meta name="google-site-verification" content="YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE">
+
+    <!-- 📄 ads.txt (For AdSense - You must create this file in your root directory) -->
+    <link rel="ads.txt" href="/ads.txt">
+
+    <!-- ✅ Critical CSS (Inline for fast rendering) -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Hind Siliguri', 'Segoe UI', sans-serif;
-        }
-
-        :root {
-            --primary: #FFD700;
-            --primary-dark: #FFA500;
-            --secondary: #00ffff;
-            --accent: #ff6b6b;
-            --bg-dark: #0a0f1f;
-            --bg-light: #1a1f35;
-            --bg-gradient: linear-gradient(135deg, #0a0f1f, #1a2f4f);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 215, 0, 0.2);
-            --text-light: #fff;
-            --text-dark: #0a0f1f;
-            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
-            --shadow-gold: 0 0 30px rgba(255, 215, 0, 0.3);
-            --border-radius-sm: 20px;
-            --border-radius-md: 30px;
-            --border-radius-lg: 50px;
-            --border-radius-xl: 60px;
-        }
-
-        body {
-            background: var(--bg-gradient);
-            min-height: 100vh;
-            color: var(--text-light);
-            position: relative;
-            overflow-x: hidden;
-            font-size: 16px;
-        }
-
-        /* লোডিং অ্যানিমেশন */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-dark);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s;
-        }
-
-        .preloader.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader {
-            text-align: center;
-        }
-
-        .crescent {
-            width: 100px;
-            height: 100px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 50px var(--primary);
-            animation: pulse 1.5s infinite;
-            margin-bottom: 30px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        /* মোবাইল নেভিগেশন */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            padding: 10px 20px;
-            z-index: 1000;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .mobile-nav.active {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-item {
-            color: var(--text-light);
-            font-size: 24px;
-            padding: 10px;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .nav-item.active {
-            background: var(--primary);
-            color: var(--text-dark);
-            transform: scale(1.2);
-        }
-
-        /* হেডার সেকশন - সম্পূর্ণ রেসপনসিভ */
-        .header {
-            background: linear-gradient(135deg, rgba(26, 31, 53, 0.95), rgba(10, 15, 31, 0.98));
-            backdrop-filter: blur(20px);
-            border-radius: var(--border-radius-xl);
-            padding: clamp(20px, 5vw, 50px);
-            margin-bottom: clamp(20px, 3vw, 40px);
-            border: 2px solid var(--primary);
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 50%;
-            animation: float 10s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-
-        .badge-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .badge {
-            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
-            color: var(--text-dark);
-            padding: clamp(8px, 2vw, 12px) clamp(20px, 4vw, 30px);
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            box-shadow: var(--shadow-gold);
-            animation: badgeGlow 2s infinite;
-        }
-
-        @keyframes badgeGlow {
-            0%, 100% { box-shadow: 0 0 20px var(--primary); }
-            50% { box-shadow: 0 0 40px var(--primary-dark); }
-        }
-
-        .header-title {
-            font-size: clamp(2.5rem, 10vw, 5.5rem);
-            font-weight: 900;
-            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: clamp(2px, 1vw, 5px);
-            line-height: 1.2;
-        }
-
-        .header-subtitle {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 30px;
-        }
-
-        /* লাইভ স্ট্যাটাস বার - মোবাইল ফ্রেন্ডলি */
-        .live-status-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: clamp(15px, 3vw, 30px);
-            flex-wrap: wrap;
-        }
-
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,68,68,0.15);
-            padding: clamp(8px, 2vw, 12px) clamp(15px, 3vw, 25px);
-            border-radius: 50px;
-            border: 2px solid #ff4444;
-            animation: livePulse 2s infinite;
-        }
-
-        @keyframes livePulse {
-            0%, 100% { border-color: #ff4444; }
-            50% { border-color: #ff8888; box-shadow: 0 0 20px #ff4444; }
-        }
-
-        .date-box {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            padding: clamp(10px, 2vw, 15px) clamp(20px, 4vw, 30px);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-        }
-
-        /* সিটি গ্রিড - সম্পূর্ণ রেসপনসিভ */
-        .city-section {
-            margin: 40px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 6vw, 2.8rem);
-            color: var(--primary);
-            margin-bottom: 30px;
-        }
-
-        .city-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            padding: 10px;
-        }
-
-        .city-card {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border: 2px solid var(--primary);
-            border-radius: var(--border-radius-md);
-            padding: clamp(15px, 3vw, 20px);
-            text-align: center;
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
-            font-weight: 600;
-            color: var(--primary);
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .city-card:hover,
-        .city-card.active {
-            background: var(--primary);
-            color: var(--text-dark);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-gold);
-        }
-
-        /* প্রোগ্রেস ড্যাশবোর্ড */
-        .progress-dashboard {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border-radius: var(--border-radius-xl);
-            padding: clamp(25px, 5vw, 40px);
-            margin: 40px 0;
-            border: 3px solid var(--primary);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: clamp(15px, 3vw, 30px);
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            border-radius: var(--border-radius-md);
-            padding: clamp(20px, 4vw, 30px);
-            text-align: center;
-            border: 2px solid var(--primary);
-        }
-
-        .stat-icon {
-            font-size: clamp(2rem, 5vw, 3rem);
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .stat-number {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 900;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-        }
-
-        .progress-container {
-            max-width: 300px;
-            margin: 30px auto;
-            text-align: center;
-        }
-
-        .progress-ring {
-            width: 100%;
-            height: auto;
-        }
-
-        .ring-bg {
-            fill: none;
-            stroke: rgba(255,215,0,0.2);
-            stroke-width: 10;
-        }
-
-        .ring-progress {
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 10;
-            stroke-linecap: round;
-            stroke-dasharray: 565.48;
-            transition: stroke-dashoffset 0.5s;
-        }
-
-        /* কাউন্টডাউন কার্ড - রেসপনসিভ */
-        .countdown-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: clamp(20px, 4vw, 40px);
-            margin: 50px 0;
-        }
-
-        .countdown-card {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border-radius: var(--border-radius-xl);
-            padding: clamp(25px, 5vw, 50px);
-            text-align: center;
-            border: 4px solid;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .countdown-card.sehri {
-            border-color: var(--secondary);
-        }
-
-        .countdown-card.iftar {
-            border-color: var(--primary);
-        }
-
-        .card-icon {
-            font-size: clamp(3rem, 8vw, 5rem);
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .card-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            margin-bottom: 20px;
-        }
-
-        .fixed-time {
-            font-size: clamp(2.2rem, 6vw, 3rem);
-            font-weight: 800;
-            margin-bottom: 30px;
-        }
-
-        .timer-grid {
-            display: flex;
-            justify-content: center;
-            gap: clamp(10px, 3vw, 30px);
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-
-        .timer-block {
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            border-radius: var(--border-radius-md);
-            padding: clamp(15px, 4vw, 30px);
-            min-width: clamp(70px, 20vw, 140px);
-            border: 3px solid;
-        }
-
-        .sehri .timer-block {
-            border-color: var(--secondary);
-        }
-
-        .iftar .timer-block {
-            border-color: var(--primary);
-        }
-
-        .timer-number {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            line-height: 1;
-        }
-
-        .timer-label {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            margin-top: 10px;
-        }
-
-        /* নামাজের সময় গ্রিড */
-        .prayer-section {
-            margin: 50px 0;
-        }
-
-        .prayer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .prayer-card {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border-radius: var(--border-radius-md);
-            padding: clamp(20px, 4vw, 30px);
-            text-align: center;
-            border: 2px solid var(--primary);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .prayer-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .prayer-icon {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 15px;
-        }
-
-        .prayer-name {
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .prayer-time {
-            font-size: clamp(1.5rem, 5vw, 2.2rem);
-            font-weight: 700;
-        }
-
-        /* দোয়া সেক্টর */
-        .dua-section {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border-radius: var(--border-radius-xl);
-            padding: clamp(30px, 6vw, 50px);
-            margin: 50px 0;
-            border: 3px solid var(--primary);
-        }
-
-        .dua-slider {
-            position: relative;
-            overflow: hidden;
-            min-height: 300px;
-        }
-
-        .dua-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .dua-item {
-            min-width: 100%;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .dua-arabic {
-            font-size: clamp(1.8rem, 6vw, 3rem);
-            font-family: 'Traditional Arabic', 'Scheherazade', serif;
-            margin-bottom: 20px;
-            color: var(--primary);
-            line-height: 1.8;
-            word-break: break-word;
-        }
-
-        .dua-meaning {
-            font-size: clamp(1rem, 3vw, 1.4rem);
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-
-        .dua-dots {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .dua-dot {
-            width: 12px;
-            height: 12px;
-            background: rgba(255,215,0,0.3);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .dua-dot.active {
-            background: var(--primary);
-            transform: scale(1.3);
-            box-shadow: 0 0 20px var(--primary);
-        }
-
-        /* কুইজ সেক্টর - রেসপনসিভ */
-        .quiz-section {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border-radius: var(--border-radius-xl);
-            padding: clamp(30px, 6vw, 50px);
-            margin: 50px 0;
-            border: 3px solid var(--primary);
-        }
-
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .quiz-question {
-            font-size: clamp(1.3rem, 5vw, 2rem);
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-
-        .quiz-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .quiz-option {
-            background: rgba(0,0,0,0.5);
-            border: 2px solid var(--primary);
-            border-radius: var(--border-radius-md);
-            padding: clamp(15px, 3vw, 20px);
-            text-align: center;
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            cursor: pointer;
-            transition: all 0.3s;
-            word-break: break-word;
-        }
-
-        .quiz-option:hover {
-            background: var(--primary);
-            color: var(--text-dark);
-            transform: scale(1.05);
-        }
-
-        /* টিপস সেক্টর */
-        .tips-section {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border-radius: var(--border-radius-xl);
-            padding: clamp(30px, 6vw, 50px);
-            margin: 50px 0;
-            border: 3px solid var(--primary);
-        }
-
-        .tip-card {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .tip-icon {
-            font-size: clamp(3rem, 8vw, 5rem);
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        .tip-title {
-            font-size: clamp(1.8rem, 5vw, 2.2rem);
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .tip-description {
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* ফুটার */
-        .footer {
-            background: linear-gradient(145deg, var(--bg-light), var(--bg-dark));
-            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-            padding: clamp(40px, 8vw, 60px) clamp(20px, 4vw, 40px) 30px;
-            margin-top: 60px;
-            border-top: 3px solid var(--primary);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: clamp(30px, 6vw, 40px);
-            margin-bottom: 40px;
-        }
-
-        .footer-logo {
-            font-size: clamp(2rem, 5vw, 2.5rem);
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 15px;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            transition: 0.3s;
-        }
-
-        .footer-links li:hover {
-            transform: translateX(10px);
-            color: var(--primary);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 20px;
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            flex-wrap: wrap;
-        }
-
-        .social-icons i {
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .social-icons i:hover {
-            color: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 2px solid rgba(255,215,0,0.2);
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-        }
-
-        /* মোবাইল স্পেসিফিক স্টাইল */
-        @media (max-width: 768px) {
-            body {
-                font-size: 14px;
-            }
-
-            .city-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timer-block {
-                min-width: 60px;
-                padding: 12px 8px;
-            }
-
-            .timer-number {
-                font-size: 2rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .social-icons {
-                justify-content: center;
-            }
-
-            .footer-links li:hover {
-                transform: translateX(0);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .city-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .badge-container {
-                flex-direction: column;
-            }
-
-            .live-status-bar {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .date-box {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .timer-grid {
-                gap: 8px;
-            }
-
-            .timer-block {
-                min-width: 50px;
-                padding: 10px 5px;
-            }
-
-            .timer-number {
-                font-size: 1.5rem;
-            }
-
-            .timer-label {
-                font-size: 0.8rem;
-            }
-
-            .quiz-options {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ল্যান্ডস্কেপ মোড */
-        @media (max-height: 600px) and (orientation: landscape) {
-            .mobile-nav {
-                display: flex;
-            }
-
-            .header {
-                padding: 15px;
-            }
-
-            .countdown-section {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* ট্যাবলেট স্পেসিফিক */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .city-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        /* Minimal Critical CSS */
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Hind Siliguri',sans-serif;}
+        :root{--primary:#FFD700;--primary-dark:#FFA500;--secondary:#00ffff;--bg-dark:#0a0f1f;--bg-darker:#050815;--bg-light:#1a1f35;--text-light:#ffffff;--text-dark:#0a0f1f}
+        body{background:linear-gradient(135deg,var(--bg-darker),var(--bg-dark));color:var(--text-light);min-height:100vh;opacity:0;transition:opacity .3s;}
+        body.loaded{opacity:1;}
+        .navbar{position:sticky;top:0;z-index:1000;background:rgba(10,15,31,.95);backdrop-filter:blur(10px);border-bottom:2px solid var(--primary);padding:15px 5%;display:flex;justify-content:space-between;align-items:center;}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+        .logo-icon{width:45px;height:45px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--text-dark);}
+        .logo-text h1{font-size:1.4rem;color:var(--primary);line-height:1.2;}
+        .logo-text small{font-size:0.8rem;color:rgba(255,255,255,.7);}
+        .loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg-darker);z-index:9999;display:flex;justify-content:center;align-items:center;flex-direction:column;gap:20px;transition:opacity .5s;}
+        .loader.hide{opacity:0;pointer-events:none;}
+        .loader-spinner{width:60px;height:60px;border:5px solid rgba(255,215,0,.2);border-top-color:var(--primary);border-radius:50%;animation:spin 1s infinite;}
+        @keyframes spin{to{transform:rotate(360deg);}}
+    </style>
+
+    <!-- 🚀 Defer non-critical CSS -->
+    <style id="full-css">
+        /* Full CSS will be injected here by JavaScript after load */
+        /* For production, you can move this to an external .css file and load it with media="print" onload trick */
     </style>
 </head>
 <body>
-    <!-- প্রিলোডার -->
-    <div class="preloader" id="preloader">
-        <div class="loader">
-            <div class="crescent"></div>
-            <h2 style="color: var(--primary);">মাহে রমজান ২০২৬</h2>
-            <p style="color: #fff; margin-top: 20px;">লোড হচ্ছে...</p>
-        </div>
+    <!-- لودر -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <p style="color: var(--primary);">API থেকে ডাটা লোড হচ্ছে...</p>
     </div>
 
-    <!-- মোবাইল নেভিগেশন -->
-    <div class="mobile-nav" id="mobileNav">
-        <i class="fas fa-home nav-item active" onclick="scrollToSection('home')"></i>
-        <i class="fas fa-city nav-item" onclick="scrollToSection('city')"></i>
-        <i class="fas fa-chart-line nav-item" onclick="scrollToSection('progress')"></i>
-        <i class="fas fa-clock nav-item" onclick="scrollToSection('countdown')"></i>
-        <i class="fas fa-mosque nav-item" onclick="scrollToSection('prayer')"></i>
+    <!-- مোবাইল মেনু -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-moon"></i></div>
+                <div class="logo-text">
+                    <h1>মাহে রমজান</h1>
+                    <small>অফিসিয়াল পোর্টাল</small>
+                </div>
+            </div>
+            <i class="fas fa-times close-btn" onclick="toggleMenu()"></i>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#home" onclick="scrollToSection('home'); toggleMenu()">হোম</a>
+            <a href="#city" onclick="scrollToSection('city'); toggleMenu()">শহর</a>
+            <a href="#countdown" onclick="scrollToSection('countdown'); toggleMenu()">কাউন্টডাউন</a>
+            <a href="#prayer" onclick="scrollToSection('prayer'); toggleMenu()">নামাজ</a>
+            <a href="#dua" onclick="scrollToSection('dua'); toggleMenu()">দোয়া</a>
+            <!-- AdSense Related Pages -->
+            <a href="#privacy" onclick="alert('Privacy Policy Page'); toggleMenu()">গোপনীয়তা নীতি</a>
+            <a href="#terms" onclick="alert('Terms of Service'); toggleMenu()">শর্তাবলী</a>
+            <a href="#contact" onclick="alert('Contact Page'); toggleMenu()">যোগাযোগ</a>
+        </div>
     </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- নেভিগেশন -->
+    <nav class="navbar">
+        <a href="#home" class="logo">
+            <div class="logo-icon"><i class="fas fa-moon"></i></div>
+            <div class="logo-text">
+                <h1>মাহে রমজান</h1>
+                <small>অফিসিয়াল পোর্টাল</small>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#home" class="active">হোম</a>
+            <a href="#city">শহর</a>
+            <a href="#countdown">কাউন্টডাউন</a>
+            <a href="#prayer">নামাজ</a>
+            <a href="#dua">দোয়া</a>
+            <!-- AdSense links in desktop nav -->
+            <a href="#privacy" style="font-size:0.9rem;">নীতি</a>
+            <a href="#terms" style="font-size:0.9rem;">শর্ত</a>
+            <div class="gov-badge"><i class="fas fa-certificate"></i> ইসলামিক ফাউন্ডেশন</div>
+        </div>
+        <i class="fas fa-bars menu-btn" onclick="toggleMenu()"></i>
+    </nav>
+
+    <!-- ব্যাক টু টপ -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
 
     <div class="container">
-        <!-- হেডার -->
-        <div class="header" id="home">
-            <div class="floating-elements">
-                <div class="floating-element" style="width: 100px; height: 100px; top: 10%; left: 5%;"></div>
-                <div class="floating-element" style="width: 150px; height: 150px; bottom: 20%; right: 10%;"></div>
-            </div>
-            
-            <div class="header-content">
-                <div class="badge-container">
-                    <span class="badge"><i class="fas fa-moon"></i> ১৪৪৭ হিজরি</span>
-                    <span class="badge"><i class="fas fa-star"></i> পবিত্র রমজান</span>
-                </div>
-                
-                <h1 class="header-title">মাহে রমজান ২০২৬</h1>
-                <h2 class="header-subtitle">আল্টিমেট রমজান ট্র্যাকিং এক্সপেরিয়েন্স</h2>
-                
-                <div class="live-status-bar">
-                    <div class="live-indicator">
-                        <i class="fas fa-circle" style="color: #ff4444; font-size: 12px;"></i>
-                        <span>লাইভ ট্র্যাকিং</span>
-                    </div>
-                    
-                    <div class="date-box" id="gregorianBox">
-                        <i class="fas fa-calendar-alt" style="color: var(--primary);"></i>
-                        <span id="gregorianDate">লোড হচ্ছে...</span>
-                    </div>
-                    
-                    <div class="date-box" id="hijriBox">
-                        <i class="fas fa-moon" style="color: var(--primary);"></i>
-                        <span id="hijriDate">লোড হচ্ছে...</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- হিরো সেকশন -->
+        <section id="home" class="hero">
+            <h2>মাহে রমজান ২০২৬</h2>
+            <p>পবিত্র মাহে রমজানের সঠিক সময়সূচি - ১৪৪৭ হিজরি</p>
+            <div class="date-badge" id="todayDate"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+        </section>
 
         <!-- সিটি সেকশন -->
-        <div class="city-section" id="city">
-            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> আপনার শহর নির্বাচন করুন</h2>
-            <div class="city-grid" id="cityGrid">
-                <!-- JavaScript দিয়ে পূরণ করা হবে -->
-            </div>
-        </div>
+        <section id="city">
+            <h2 class="section-title">আপনার শহর নির্বাচন করুন</h2>
+            <div class="city-grid" id="cityGrid"></div>
+        </section>
 
-        <!-- প্রোগ্রেস ড্যাশবোর্ড -->
-        <div class="progress-dashboard" id="progress">
-            <h2 class="section-title"><i class="fas fa-chart-line"></i> রমজান প্রোগ্রেস ট্র্যাকার</h2>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-calendar-day"></i></div>
-                    <div class="stat-number" id="currentDay">0</div>
-                    <div class="stat-label">চলমান রমজান</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
-                    <div class="stat-number" id="remainingDays">0</div>
-                    <div class="stat-label">বাকি দিন</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
-                    <div class="stat-number" id="completedDays">0</div>
-                    <div class="stat-label">অতিবাহিত</div>
-                </div>
-            </div>
+        <!-- আজকের তথ্য -->
+        <section class="today-info">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 30px;">আজকের রমজান তথ্য</h2>
+            <div class="today-stats" id="todayStats"></div>
+        </section>
 
-            <div class="progress-container">
-                <svg viewBox="0 0 200 200" class="progress-ring">
-                    <circle cx="100" cy="100" r="90" class="ring-bg"></circle>
-                    <circle cx="100" cy="100" r="90" class="ring-progress" id="progressRing"></circle>
-                </svg>
-                <div style="font-size: clamp(1.5rem, 5vw, 2rem); color: var(--primary); margin-top: 20px;" id="progressPercentage">0% সম্পন্ন</div>
-            </div>
-        </div>
-
-        <!-- কাউন্টডাউন সেকশন -->
-        <div class="countdown-section" id="countdown">
-            <!-- সেহরি কার্ড -->
+        <!-- কাউন্টডাউন -->
+        <section id="countdown" class="countdown-grid">
             <div class="countdown-card sehri">
-                <div class="card-icon">🌅</div>
-                <h2 class="card-title">সেহরির শেষ সময়</h2>
+                <div class="countdown-title">🌅 সেহরির শেষ সময়</div>
                 <div class="fixed-time" id="sehriFixed">--:-- --</div>
-                
-                <div class="timer-grid">
-                    <div class="timer-block">
-                        <div class="timer-number" id="sehriHours">00</div>
-                        <div class="timer-label">ঘন্টা</div>
-                    </div>
-                    <div class="timer-block">
-                        <div class="timer-number" id="sehriMinutes">00</div>
-                        <div class="timer-label">মিনিট</div>
-                    </div>
-                    <div class="timer-block">
-                        <div class="timer-number" id="sehriSeconds">00</div>
-                        <div class="timer-label">সেকেন্ড</div>
-                    </div>
+                <div class="timer">
+                    <div class="timer-block"><div class="timer-number" id="sehriHours">00</div><div class="timer-label">ঘন্টা</div></div>
+                    <div class="timer-block"><div class="timer-number" id="sehriMinutes">00</div><div class="timer-label">মিনিট</div></div>
+                    <div class="timer-block"><div class="timer-number" id="sehriSeconds">00</div><div class="timer-label">সেকেন্ড</div></div>
                 </div>
-                
-                <div style="font-size: clamp(1.2rem, 4vw, 1.8rem); color: var(--secondary);" id="sehriStatus"></div>
+                <div id="sehriStatus" style="color: var(--secondary);"></div>
             </div>
-
-            <!-- ইফতার কার্ড -->
             <div class="countdown-card iftar">
-                <div class="card-icon">🌇</div>
-                <h2 class="card-title">ইফতারের সময়</h2>
+                <div class="countdown-title">🌇 ইফতারের সময়</div>
                 <div class="fixed-time" id="iftarFixed">--:-- --</div>
-                
-                <div class="timer-grid">
-                    <div class="timer-block">
-                        <div class="timer-number" id="iftarHours">00</div>
-                        <div class="timer-label">ঘন্টা</div>
-                    </div>
-                    <div class="timer-block">
-                        <div class="timer-number" id="iftarMinutes">00</div>
-                        <div class="timer-label">মিনিট</div>
-                    </div>
-                    <div class="timer-block">
-                        <div class="timer-number" id="iftarSeconds">00</div>
-                        <div class="timer-label">সেকেন্ড</div>
-                    </div>
+                <div class="timer">
+                    <div class="timer-block"><div class="timer-number" id="iftarHours">00</div><div class="timer-label">ঘন্টা</div></div>
+                    <div class="timer-block"><div class="timer-number" id="iftarMinutes">00</div><div class="timer-label">মিনিট</div></div>
+                    <div class="timer-block"><div class="timer-number" id="iftarSeconds">00</div><div class="timer-label">সেকেন্ড</div></div>
                 </div>
-                
-                <div style="font-size: clamp(1.2rem, 4vw, 1.8rem); color: var(--primary);" id="iftarStatus"></div>
+                <div id="iftarStatus" style="color: var(--primary);"></div>
             </div>
-        </div>
+        </section>
 
-        <!-- নামাজের সময় সেকশন -->
-        <div class="prayer-section" id="prayer">
-            <h2 class="section-title"><i class="fas fa-mosque"></i> নামাজের সময়সূচি</h2>
-            <div class="prayer-grid" id="prayerGrid">
-                <!-- JavaScript দিয়ে পূরণ করা হবে -->
-            </div>
-        </div>
+        <!-- নামাজের সময় -->
+        <section id="prayer">
+            <h2 class="section-title">নামাজের সময়সূচি</h2>
+            <div class="prayer-grid" id="prayerGrid"></div>
+        </section>
 
         <!-- দোয়া সেকশন -->
-        <div class="dua-section">
-            <h2 class="section-title"><i class="fas fa-hands-praying"></i> রমজানের দোয়া</h2>
+        <section id="dua" class="dua-section">
+            <h2 class="section-title">রমজানের দোয়া</h2>
             <div class="dua-slider">
-                <div class="dua-track" id="duaTrack">
-                    <!-- JavaScript দিয়ে পূরণ করা হবে -->
-                </div>
-                <div class="dua-dots" id="duaDots"></div>
+                <div class="dua-track" id="duaTrack"></div>
             </div>
-        </div>
+            <div class="dua-dots" id="duaDots"></div>
+        </section>
 
-        <!-- কুইজ সেকশন -->
-        <div class="quiz-section">
-            <h2 class="section-title"><i class="fas fa-question-circle"></i> রমজান কুইজ</h2>
-            <div class="quiz-container">
-                <div class="quiz-question" id="quizQuestion">লোড হচ্ছে...</div>
-                <div class="quiz-options" id="quizOptions"></div>
-                <div style="text-align: center; font-size: 1.3rem; margin-top: 20px;" id="quizFeedback"></div>
-            </div>
-        </div>
-
-        <!-- টিপস সেকশন -->
-        <div class="tips-section">
-            <h2 class="section-title"><i class="fas fa-lightbulb"></i> রমজান টিপস</h2>
-            <div class="tip-card" id="tipCard">
-                <div class="tip-icon">💧</div>
-                <div class="tip-title">পানি পান</div>
-                <div class="tip-description">সেহরি ও ইফতারের মাঝে পর্যাপ্ত পানি পান করুন। প্রতি ঘন্টায় ১ গ্লাস পানি পান করার চেষ্টা করুন।</div>
-            </div>
-        </div>
-
-        <!-- ফুটার -->
-        <div class="footer">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo"><i class="fas fa-moon"></i> মাহে রমজান</div>
-                    <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.8;">পবিত্র রমজান মাসের সম্পূর্ণ সময়সূচি ও ইসলামিক গাইডলাইন</p>
-                </div>
-                <div>
-                    <h3 style="color: var(--primary); margin-bottom: 25px;">দ্রুত লিংক</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-angle-right"></i> নামাজের সময়সূচি</li>
-                        <li><i class="fas fa-angle-right"></i> সেহরি ও ইফতার</li>
-                        <li><i class="fas fa-angle-right"></i> দোয়া ও জিকির</li>
-                        <li><i class="fas fa-angle-right"></i> রমজান ক্যালেন্ডার</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 style="color: var(--primary); margin-bottom: 25px;">যোগাযোগ</h3>
-                    <div class="social-icons">
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© ২০২৬ মাহে রমজান - সকল অধিকার সংরক্ষিত</p>
-                <p style="margin-top: 10px;">ইসলামিক ফাউন্ডেশন বাংলাদেশ কর্তৃক পরিচালিত</p>
-            </div>
+        <!-- AdSense In-Article Ad (Placeholder - Add your AdSense code here) -->
+        <div class="adsense-placeholder" style="text-align:center; margin:40px 0; padding:20px; background:rgba(255,215,0,0.1); border-radius:12px;">
+            <p style="color:var(--primary);">বিজ্ঞাপন</p>
+            <!-- আপনার Google AdSense কোড এখানে বসবে -->
         </div>
     </div>
 
+    <!-- ফুটার (এখন পূর্ণ) -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="logo" style="margin-bottom: 15px;">
+                    <div class="logo-icon"><i class="fas fa-moon"></i></div>
+                    <div class="logo-text"><h1>মাহে রমজান</h1><small>অফিসিয়াল পোর্টাল</small></div>
+                </div>
+                <p style="opacity: 0.8;">ইসলামিক ফাউন্ডেশন বাংলাদেশ কর্তৃক পরিচালিত পবিত্র রমজান মাসের অফিসিয়াল টাইমিং পোর্টাল।</p>
+            </div>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">দ্রুত লিংক</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-angle-left"></i> নামাজের সময়সূচি</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-angle-left"></i> সেহরি ও ইফতার</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-angle-left"></i> দোয়া ও জিকির</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">গুরুত্বপূর্ণ</h3>
+                <ul class="footer-links" style="list-style: none;">
+                    <li style="margin-bottom: 10px;" onclick="alert('Privacy Policy Page')"><i class="fas fa-angle-left"></i> গোপনীয়তা নীতি</li>
+                    <li style="margin-bottom: 10px;" onclick="alert('Terms of Service')"><i class="fas fa-angle-left"></i> ব্যবহারের শর্তাবলী</li>
+                    <li style="margin-bottom: 10px;" onclick="alert('Contact Page')"><i class="fas fa-angle-left"></i> যোগাযোগ</li>
+                    <li style="margin-bottom: 10px;" onclick="alert('About Page')"><i class="fas fa-angle-left"></i> আমাদের সম্পর্কে</li>
+                    <li style="margin-bottom: 10px;" onclick="alert('Disclaimer Page')"><i class="fas fa-angle-left"></i> দাবিত্যাগ</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 15px;">যোগাযোগ</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> আগারগাঁও, ঢাকা</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-phone"></i> +৮৮০ ২-৮১১৩৩৩৩</li>
+                    <li style="margin-bottom: 10px;"><i class="fas fa-envelope"></i> info@islamicfoundation.gov.bd</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৬ ইসলামিক ফাউন্ডেশন বাংলাদেশ - সকল অধিকার সংরক্ষিত</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;" id="footerDate"></p>
+            <!-- AdSense Publisher ID (Optional) -->
+            <p style="margin-top: 5px; font-size: 0.8rem;">ca-pub-XXXXXXXXXXXXXXXX</p>
+        </div>
+    </footer>
+
+    <!-- 🌟 Non-Critical CSS injected via JavaScript to improve speed -->
     <script>
-        // প্রিলোডার হাইড
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('fade-out');
-            }, 1000);
+        // Inject Full CSS after page load (simulate lazy-loading CSS)
+        window.addEventListener('load', function() {
+            const fullCSS = `
+                /* Full CSS Styles */
+                .container{max-width:1200px;margin:0 auto;padding:20px;}
+                .section-title{text-align:center;font-size:2rem;color:var(--primary);margin:40px 0 30px;}
+                .hero{text-align:center;padding:60px 20px;background:linear-gradient(135deg,rgba(255,215,0,0.1),transparent);border-radius:30px;margin:20px 0;}
+                .hero h2{font-size:3rem;color:var(--primary);margin-bottom:10px;}
+                .hero p{font-size:1.2rem;opacity:0.9;margin-bottom:30px;}
+                .date-badge{display:inline-block;background:rgba(255,215,0,0.2);border:2px solid var(--primary);padding:12px 35px;border-radius:50px;font-size:1.2rem;}
+                .city-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;margin:30px 0;}
+                .city-card{background:linear-gradient(145deg,var(--bg-light),var(--bg-darker));border:2px solid var(--primary);border-radius:12px;padding:15px;text-align:center;font-weight:600;cursor:pointer;transition:0.3s;}
+                .city-card:hover,.city-card.active{background:var(--primary);color:var(--text-dark);transform:scale(1.05);box-shadow:0 0 30px rgba(255,215,0,0.3);}
+                .today-info{background:linear-gradient(145deg,var(--bg-light),var(--bg-darker));border-radius:30px;padding:40px;margin:40px 0;border:3px solid var(--primary);}
+                .today-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+                .stat-card{text-align:center;padding:20px;background:rgba(0,0,0,0.3);border-radius:12px;border:1px solid rgba(255,215,0,0.3);}
+                .stat-label{color:var(--primary);font-size:1.1rem;margin-bottom:10px;}
+                .stat-value{font-size:2.5rem;font-weight:700;line-height:1;}
+                .countdown-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin:40px 0;}
+                .countdown-card{background:linear-gradient(145deg,var(--bg-light),var(--bg-darker));border-radius:30px;padding:30px;text-align:center;border:3px solid;}
+                .countdown-card.sehri{border-color:var(--secondary);}
+                .countdown-card.iftar{border-color:var(--primary);}
+                .countdown-title{font-size:1.8rem;margin-bottom:15px;}
+                .fixed-time{font-size:2.2rem;font-weight:700;margin-bottom:20px;}
+                .timer{display:flex;justify-content:center;gap:15px;margin:20px 0;}
+                .timer-block{background:rgba(0,0,0,0.5);border-radius:12px;padding:15px;min-width:80px;}
+                .timer-number{font-size:2rem;font-weight:700;}
+                .timer-label{font-size:0.8rem;opacity:0.8;}
+                .prayer-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:15px;margin:30px 0;}
+                .prayer-card{background:linear-gradient(145deg,var(--bg-light),var(--bg-darker));border:2px solid var(--primary);border-radius:20px;padding:25px 15px;text-align:center;}
+                .prayer-name{color:var(--primary);font-size:1.3rem;margin-bottom:10px;}
+                .prayer-time{font-size:1.5rem;font-weight:700;}
+                .dua-section{background:linear-gradient(145deg,var(--bg-light),var(--bg-darker));border-radius:30px;padding:40px;margin:40px 0;border:3px solid var(--primary);}
+                .dua-slider{overflow:hidden;position:relative;}
+                .dua-track{display:flex;transition:transform 0.5s;}
+                .dua-slide{min-width:100%;text-align:center;padding:20px;}
+                .dua-arabic{font-size:2rem;font-family:'Amiri',serif;margin-bottom:20px;color:var(--primary);line-height:2;}
+                .dua-dots{display:flex;justify-content:center;gap:10px;margin-top:20px;}
+                .dua-dot{width:12px;height:12px;background:rgba(255,215,0,0.3);border-radius:50%;cursor:pointer;transition:0.3s;}
+                .dua-dot.active{background:var(--primary);transform:scale(1.3);}
+                .footer{background:linear-gradient(145deg,var(--bg-light),var(--bg-darker));border-top:3px solid var(--primary);padding:50px 20px 20px;margin-top:50px;}
+                .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;max-width:1200px;margin:0 auto;}
+                .footer-bottom{text-align:center;padding-top:30px;margin-top:30px;border-top:1px solid rgba(255,215,0,0.2);}
+                .back-to-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:var(--primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-dark);cursor:pointer;opacity:0;visibility:hidden;transition:0.3s;z-index:99;border:2px solid white;}
+                .back-to-top.show{opacity:1;visibility:visible;}
+                .mobile-menu{position:fixed;top:0;left:-100%;width:80%;max-width:300px;height:100vh;background:var(--bg-light);z-index:1001;padding:20px;transition:0.3s;border-right:2px solid var(--primary);}
+                .mobile-menu.active{left:0;}
+                .mobile-menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;padding-bottom:15px;border-bottom:1px solid rgba(255,215,0,0.3);}
+                .close-btn{font-size:1.5rem;color:var(--primary);cursor:pointer;}
+                .mobile-menu-links{display:flex;flex-direction:column;gap:15px;}
+                .mobile-menu-links a{color:var(--text-light);text-decoration:none;padding:12px;border-radius:12px;transition:0.3s;}
+                .mobile-menu-links a:hover,.mobile-menu-links a.active{background:var(--primary);color:var(--text-dark);}
+                .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;display:none;}
+                .overlay.active{display:block;}
+                .menu-btn{display:none;font-size:1.8rem;color:var(--primary);cursor:pointer;}
+                .nav-links{display:flex;gap:20px;align-items:center;}
+                .nav-links a{color:var(--text-light);text-decoration:none;padding:8px 16px;border-radius:30px;transition:0.3s;}
+                .nav-links a:hover,.nav-links a.active{background:var(--primary);color:var(--text-dark);}
+                .gov-badge{background:#006400;color:white;padding:6px 15px;border-radius:30px;font-size:0.85rem;display:flex;align-items:center;gap:8px;border:1px solid var(--primary);}
+                @media (max-width: 768px){.nav-links{display:none;}.menu-btn{display:block;}.hero h2{font-size:2rem;}.countdown-grid{grid-template-columns:1fr;}.prayer-grid{grid-template-columns:repeat(2,1fr);}.today-stats{grid-template-columns:repeat(2,1fr);}}
+                @media (max-width: 480px){.prayer-grid{grid-template-columns:1fr;}.today-stats{grid-template-columns:1fr;}.timer-block{min-width:60px;padding:10px;}.timer-number{font-size:1.5rem;}}
+                @keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+                @keyframes slideOut{from{transform:translateX(0);opacity:1;}to{transform:translateX(100%);opacity:0;}}
+            `;
+            const style = document.createElement('style');
+            style.textContent = fullCSS;
+            document.head.appendChild(style);
+            document.body.classList.add('loaded');
         });
 
-        // মোবাইল নেভিগেশন দেখানো/লুকানো
-        window.addEventListener('scroll', () => {
-            const mobileNav = document.getElementById('mobileNav');
-            if (window.innerWidth <= 768) {
-                mobileNav.classList.add('active');
-            } else {
-                mobileNav.classList.remove('active');
-            }
-        });
+        // ---------- কনফিগারেশন ----------
+        const CONFIG = {
+            DEFAULT_CITY: 'Dhaka',
+            DEFAULT_COUNTRY: 'Bangladesh',
+            API_METHOD: 1,
+            RAMADAN_START: new Date(2026, 2, 1)
+        };
 
-        // স্ক্রল টু সেকশন
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            element.scrollIntoView({ behavior: 'smooth' });
-            
-            // নেভিগেশন আইটেম active করা
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
+        // ---------- স্টেট ----------
+        const state = {
+            currentCity: CONFIG.DEFAULT_CITY,
+            timings: null,
+            ramadanDay: 1,
+            loading: true
+        };
 
-        // ডাটা স্টোর
-        let currentCity = 'Dhaka';
-        let currentCountry = 'Bangladesh';
-        let currentTimings = null;
-        let countdownInterval;
-        let currentQuestion = 0;
-
-        // কুইজ ডাটা
-        const quizData = [
-            {
-                question: 'রমজান মাসের প্রথম দিনকে কী বলা হয়?',
-                options: ['চাঁদ রাত', 'জুমাতুল বিদা', 'শবে কদর', 'ঈদ'],
-                correct: 'চাঁদ রাত'
-            },
-            {
-                question: 'পবিত্র কুরআন নাযিল হয় কোন মাসে?',
-                options: ['রজব', 'শাবান', 'রমজান', 'শাওয়াল'],
-                correct: 'রমজান'
-            },
-            {
-                question: 'শবে কদর কোন মাসে পালিত হয়?',
-                options: ['রজব', 'শাবান', 'রমজান', 'মুহররম'],
-                correct: 'রমজান'
-            },
-            {
-                question: 'রমজান মাসে কোন ইবাদত ফরজ?',
-                options: ['নামাজ', 'রোজা', 'হজ্জ', 'জাকাত'],
-                correct: 'রোজা'
-            }
-        ];
-
-        // দোয়া ডাটা
-        const duas = [
-            {
-                arabic: 'اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ',
-                meaning: 'উচ্চারণ: আল্লাহুম্মা লাকা ছুমতু ওয়া বিকা আমানতু ওয়া আলাইকা তাওয়াক্কালতু ওয়া আলা রিজক্বিকা আফতারতু',
-                translation: 'অর্থ: হে আল্লাহ! আমি তোমারই জন্য রোজা রেখেছি, তোমার ওপর ঈমান এনেছি, তোমার ওপর ভরসা করেছি এবং তোমার দেওয়া রিজিক দ্বারা ইফতার করছি।'
-            },
-            {
-                arabic: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',
-                meaning: 'উচ্চারণ: রাব্বানা আতিনা ফিদ্দুনিয়া হাসানাতাও ওয়া ফিল আখিরাতি হাসানাতাও ওয়া কিনা আযাবান্নার',
-                translation: 'অর্থ: হে আমাদের পালনকর্তা! আমাদের দুনিয়াতে কল্যাণ দান কর এবং আখেরাতেও কল্যাণ দান কর এবং জাহান্নামের শাস্তি থেকে রক্ষা কর।'
-            },
-            {
-                arabic: 'اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ',
-                meaning: 'উচ্চারণ: আল্লাহুম্মা আজিরনি মিনান্নার',
-                translation: 'অর্থ: হে আল্লাহ! আমাকে জাহান্নামের আগুন থেকে রক্ষা করুন।'
-            }
-        ];
-
-        // টিপস ডাটা
-        const tips = [
-            { icon: '💧', title: 'পানি পান', desc: 'সেহরি ও ইফতারের মাঝে পর্যাপ্ত পানি পান করুন। প্রতি ঘন্টায় ১ গ্লাস পানি পান করার চেষ্টা করুন।' },
-            { icon: '🥗', title: 'সুষম খাবার', desc: 'ইফতারে ভাজাপোড়া কম খেয়ে ফলমূল, শাকসবজি ও প্রোটিন জাতীয় খাবার বেশি খান।' },
-            { icon: '🕌', title: 'নামাজ', desc: 'পাঁচ ওয়াক্ত নামাজের পাশাপাশি তারাবিহ ও তাহাজ্জুদ নামাজ পড়ার চেষ্টা করুন।' },
-            { icon: '📖', title: 'কুরআন তিলাওয়াত', desc: 'প্রতিদিন অন্তত ১ পারা কুরআন তিলাওয়াত করার চেষ্টা করুন।' },
-            { icon: '🤲', title: 'দোয়া', desc: 'ইফতারের পূর্ব মুহূর্ত দোয়া কবুলের সময়, বেশি বেশি দোয়া করুন।' }
-        ];
-
-        // শহরের তালিকা
         const cities = [
             { name: 'ঢাকা', english: 'Dhaka' },
             { name: 'চট্টগ্রাম', english: 'Chittagong' },
@@ -1115,33 +338,241 @@
             { name: 'ময়মনসিংহ', english: 'Mymensingh' }
         ];
 
-        // সিটি গ্রিড তৈরি
+        // ---------- উন্নত API ফাংশন (Retry logic + Local Storage) ----------
+        async function getRamadanTimes(city, country, retries = 3) {
+            // Check local storage first (for offline support)
+            const cached = localStorage.getItem(`timings_${city}`);
+            if (cached) {
+                try {
+                    const parsed = JSON.parse(cached);
+                    const cacheAge = Date.now() - parsed.timestamp;
+                    if (cacheAge < 30 * 60 * 1000) { // 30 minutes cache
+                        state.timings = parsed.data;
+                        state.ramadanDay = parsed.ramadanDay || calculateRamadanDay();
+                        updateAllDisplays();
+                        return;
+                    }
+                } catch (e) {}
+            }
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${CONFIG.API_METHOD}&t=${Date.now()}`;
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    const data = await response.json();
+                    if (data.code === 200 && data.data) {
+                        state.timings = data.data.timings;
+                        state.ramadanDay = parseInt(data.data.date.hijri.day) || calculateRamadanDay();
+                        // Save to local storage
+                        localStorage.setItem(`timings_${city}`, JSON.stringify({
+                            data: state.timings,
+                            ramadanDay: state.ramadanDay,
+                            timestamp: Date.now()
+                        }));
+                        updateAllDisplays();
+                        return;
+                    } else {
+                        throw new Error('Invalid API response');
+                    }
+                } catch (error) {
+                    console.log(`API attempt ${i+1} failed:`, error);
+                    if (i === retries - 1) {
+                        useBackupData(city);
+                    } else {
+                        await new Promise(r => setTimeout(r, 1000 * (i+1))); // exponential backoff
+                    }
+                }
+            }
+        }
+
+        function useBackupData(city) {
+            const backupTimes = {
+                'Dhaka':     { Fajr: '04:30', Dhuhr: '12:00', Asr: '15:30', Maghrib: '18:00', Isha: '19:30' },
+                'Chittagong':{ Fajr: '04:28', Dhuhr: '11:58', Asr: '15:28', Maghrib: '17:58', Isha: '19:28' },
+                'Sylhet':    { Fajr: '04:25', Dhuhr: '11:55', Asr: '15:25', Maghrib: '17:55', Isha: '19:25' },
+                'Khulna':    { Fajr: '04:32', Dhuhr: '12:02', Asr: '15:32', Maghrib: '18:02', Isha: '19:32' },
+                'Rajshahi':  { Fajr: '04:35', Dhuhr: '12:05', Asr: '15:35', Maghrib: '18:05', Isha: '19:35' },
+                'Barisal':   { Fajr: '04:31', Dhuhr: '12:01', Asr: '15:31', Maghrib: '18:01', Isha: '19:31' },
+                'Rangpur':   { Fajr: '04:38', Dhuhr: '12:08', Asr: '15:38', Maghrib: '18:08', Isha: '19:38' },
+                'Mymensingh':{ Fajr: '04:29', Dhuhr: '11:59', Asr: '15:29', Maghrib: '17:59', Isha: '19:29' }
+            };
+            state.timings = backupTimes[city] || backupTimes['Dhaka'];
+            state.ramadanDay = calculateRamadanDay();
+            showNotification('ব্যাকআপ ডাটা ব্যবহার করা হচ্ছে', 'warning');
+            updateAllDisplays();
+        }
+
+        function calculateRamadanDay() {
+            const today = new Date();
+            const diffTime = today - CONFIG.RAMADAN_START;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            if (diffDays > 0 && diffDays <= 30) return diffDays;
+            if (diffDays > 30) return 30;
+            return 1;
+        }
+
+        function updateAllDisplays() {
+            if (!state.timings) return;
+            updateDateDisplay();
+            updateTodayStats();
+            updatePrayerTimes();
+            updateActiveCity();
+            hideLoader();
+        }
+
+        function hideLoader() {
+            if (state.loading) {
+                state.loading = false;
+                document.getElementById('loader').classList.add('hide');
+            }
+        }
+
+        function updateDateDisplay() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('todayDate').innerHTML = `
+                <i class="fas fa-calendar-alt"></i> 
+                ${today.toLocaleDateString('bn-BD', options)} | 
+                রমজান ${state.ramadanDay}, ১৪৪৭ হিজরি
+            `;
+            document.getElementById('footerDate').innerHTML = `
+                সর্বশেষ আপডেট: ${today.toLocaleTimeString('bn-BD')} | 
+                রমজান ${state.ramadanDay}, ১৪৪৭ হিজরি
+            `;
+        }
+
+        function updateTodayStats() {
+            const completed = state.ramadanDay - 1;
+            const remaining = 30 - state.ramadanDay;
+            const percent = Math.round((completed / 30) * 100);
+            document.getElementById('todayStats').innerHTML = `
+                <div class="stat-card"><div class="stat-label">আজকের রমজান</div><div class="stat-value">${state.ramadanDay}</div></div>
+                <div class="stat-card"><div class="stat-label">অতিবাহিত</div><div class="stat-value">${completed}</div></div>
+                <div class="stat-card"><div class="stat-label">বাকি দিন</div><div class="stat-value">${remaining}</div></div>
+                <div class="stat-card"><div class="stat-label">সম্পন্ন</div><div class="stat-value">${percent}%</div></div>
+            `;
+        }
+
+        function updatePrayerTimes() {
+            const prayers = [
+                { name: 'ফজর', time: state.timings.Fajr },
+                { name: 'যোহর', time: state.timings.Dhuhr },
+                { name: 'আছর', time: state.timings.Asr },
+                { name: 'মাগরিব', time: state.timings.Maghrib },
+                { name: 'এশা', time: state.timings.Isha }
+            ];
+            document.getElementById('prayerGrid').innerHTML = prayers.map(p => `
+                <div class="prayer-card">
+                    <div class="prayer-name">${p.name}</div>
+                    <div class="prayer-time">${formatTime(p.time)}</div>
+                </div>
+            `).join('');
+            document.getElementById('sehriFixed').textContent = formatTime(state.timings.Fajr);
+            document.getElementById('iftarFixed').textContent = formatTime(state.timings.Maghrib);
+        }
+
+        function formatTime(time24) {
+            const [hour, minute] = time24.split(':');
+            const h = parseInt(hour);
+            const period = h >= 12 ? 'PM' : 'AM';
+            const hour12 = h % 12 || 12;
+            return `${hour12}:${minute} ${period}`;
+        }
+
+        function updateCountdowns() {
+            if (!state.timings) return;
+            const now = new Date();
+            const [sh, sm] = state.timings.Fajr.split(':');
+            const sehri = new Date(now); sehri.setHours(parseInt(sh), parseInt(sm), 0);
+            if (now > sehri) sehri.setDate(sehri.getDate() + 1);
+            const [ih, im] = state.timings.Maghrib.split(':');
+            const iftar = new Date(now); iftar.setHours(parseInt(ih), parseInt(im), 0);
+            if (now > iftar) iftar.setDate(iftar.getDate() + 1);
+            
+            updateTimer('sehri', sehri - now);
+            updateTimer('iftar', iftar - now);
+        }
+
+        function updateTimer(type, diff) {
+            if (diff > 0) {
+                const hours = Math.floor(diff / (1000*60*60));
+                const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+                const seconds = Math.floor((diff % (1000*60)) / 1000);
+                document.getElementById(`${type}Hours`).textContent = hours.toString().padStart(2,'0');
+                document.getElementById(`${type}Minutes`).textContent = minutes.toString().padStart(2,'0');
+                document.getElementById(`${type}Seconds`).textContent = seconds.toString().padStart(2,'0');
+                let status = '';
+                if (hours > 0) status = `${hours} ঘন্টা ${minutes} মিনিট বাকি`;
+                else if (minutes > 0) status = `${minutes} মিনিট ${seconds} সেকেন্ড বাকি`;
+                else status = `${seconds} সেকেন্ড বাকি`;
+                document.getElementById(`${type}Status`).textContent = status;
+            }
+        }
+
         function generateCityGrid() {
             const grid = document.getElementById('cityGrid');
             cities.forEach(city => {
                 const card = document.createElement('div');
-                card.className = `city-card ${city.english === 'Dhaka' ? 'active' : ''}`;
+                card.className = `city-card ${city.english === state.currentCity ? 'active' : ''}`;
                 card.textContent = city.name;
-                card.onclick = () => changeCity(city.english, 'Bangladesh');
+                card.onclick = () => changeCity(city.english);
                 grid.appendChild(card);
             });
         }
 
-        // দোয়া স্লাইডার তৈরি
+        async function changeCity(city) {
+            state.currentCity = city;
+            state.loading = true;
+            document.getElementById('loader').classList.remove('hide');
+            await getRamadanTimes(city, 'Bangladesh');
+            updateActiveCity();
+            showNotification(`${getCityName(city)}-এর সময়সূচি লোড হয়েছে`);
+        }
+
+        function getCityName(english) {
+            const city = cities.find(c => c.english === english);
+            return city ? city.name : english;
+        }
+
+        function updateActiveCity() {
+            document.querySelectorAll('.city-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.textContent === getCityName(state.currentCity)) card.classList.add('active');
+            });
+        }
+
+        function showNotification(message, type = 'success') {
+            const notif = document.createElement('div');
+            notif.style.cssText = `
+                position: fixed; top: 20px; right: 20px; background: ${type === 'success' ? 'var(--primary)' : '#ff4444'};
+                color: ${type === 'success' ? 'var(--text-dark)' : 'white'}; padding: 15px 25px;
+                border-radius: 30px; font-weight: 600; z-index: 10000; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s;
+            `;
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            setTimeout(() => {
+                notif.style.animation = 'slideOut 0.3s';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // দোয়া স্লাইডার
+        const duas = [
+            { arabic: 'اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ', translation: 'হে আল্লাহ! আমি তোমারই জন্য রোজা রেখেছি...' },
+            { arabic: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ', translation: 'হে আমাদের পালনকর্তা! আমাদের দুনিয়া ও আখিরাতে কল্যাণ দান কর...' },
+            { arabic: 'اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ', translation: 'হে আল্লাহ! আমাকে জাহান্নামের আগুন থেকে রক্ষা করুন।' }
+        ];
+
         function generateDuaSlider() {
             const track = document.getElementById('duaTrack');
             const dots = document.getElementById('duaDots');
-            
             duas.forEach((dua, index) => {
-                const item = document.createElement('div');
-                item.className = 'dua-item';
-                item.innerHTML = `
-                    <div class="dua-arabic">${dua.arabic}</div>
-                    <div class="dua-meaning">${dua.meaning}</div>
-                    <div style="font-size: 1.1rem;">${dua.translation}</div>
-                `;
-                track.appendChild(item);
-                
+                const slide = document.createElement('div');
+                slide.className = 'dua-slide';
+                slide.innerHTML = `<div class="dua-arabic">${dua.arabic}</div><p style="font-size: 1.2rem;">${dua.translation}</p>`;
+                track.appendChild(slide);
                 const dot = document.createElement('span');
                 dot.className = `dua-dot ${index === 0 ? 'active' : ''}`;
                 dot.onclick = () => slideDua(index);
@@ -1149,247 +580,48 @@
             });
         }
 
-        // দোয়া স্লাইড
-        let duaIndex = 0;
         function slideDua(index) {
-            duaIndex = index;
-            document.getElementById('duaTrack').style.transform = `translateX(-${index * 100}%)`;
-            document.querySelectorAll('.dua-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
+            document.querySelector('.dua-track').style.transform = `translateX(-${index * 100}%)`;
+            document.querySelectorAll('.dua-dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
         }
 
-        // অটো দোয়া স্লাইড
+        let duaIndex = 0;
         setInterval(() => {
             duaIndex = (duaIndex + 1) % duas.length;
             slideDua(duaIndex);
         }, 8000);
 
-        // টিপস রোটেট
-        let tipIndex = 0;
-        setInterval(() => {
-            tipIndex = (tipIndex + 1) % tips.length;
-            const tip = tips[tipIndex];
-            document.querySelector('.tip-icon').textContent = tip.icon;
-            document.querySelector('.tip-title').textContent = tip.title;
-            document.querySelector('.tip-description').textContent = tip.desc;
-        }, 5000);
-
-        // কুইজ জেনারেট
-        function loadQuiz() {
-            const question = quizData[currentQuestion];
-            document.getElementById('quizQuestion').textContent = question.question;
-            
-            const optionsHtml = question.options.map(opt => 
-                `<div class="quiz-option" onclick="checkAnswer(this, '${opt}')">${opt}</div>`
-            ).join('');
-            
-            document.getElementById('quizOptions').innerHTML = optionsHtml;
+        // মেনু টগল
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
         }
 
-        // কুইজ চেক
-        function checkAnswer(element, answer) {
-            const correct = quizData[currentQuestion].correct;
-            const feedback = document.getElementById('quizFeedback');
-            
-            if (answer === correct) {
-                element.classList.add('correct');
-                feedback.innerHTML = '✅ সঠিক উত্তর!';
-                feedback.style.color = '#00ff00';
-            } else {
-                element.classList.add('wrong');
-                feedback.innerHTML = `❌ ভুল উত্তর! সঠিক উত্তর: ${correct}`;
-                feedback.style.color = '#ff4444';
-            }
-            
-            setTimeout(() => {
-                currentQuestion = (currentQuestion + 1) % quizData.length;
-                loadQuiz();
-                feedback.innerHTML = '';
-            }, 2000);
-        }
-
-        // API থেকে সময় আনা
-        async function getRamadanTimes(city, country) {
-            try {
-                const response = await fetch(
-                    `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=1`
-                );
-                
-                if (!response.ok) throw new Error('Network error');
-                
-                const data = await response.json();
-                currentTimings = data.data.timings;
-                
-                updateDisplay(data.data);
-                startCountdown();
-                
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        // ডিসপ্লে আপডেট
-        function updateDisplay(data) {
-            const timings = data.timings;
-            const date = data.date;
-            
-            // তারিখ আপডেট
-            document.getElementById('gregorianDate').textContent = date.gregorian.date;
-            document.getElementById('hijriDate').textContent = 
-                `${date.hijri.day} ${date.hijri.month.en} ${date.hijri.year}`;
-            
-            // রমজান দিন
-            const ramadanDay = parseInt(date.hijri.day);
-            document.getElementById('currentDay').textContent = ramadanDay;
-            document.getElementById('remainingDays').textContent = 30 - ramadanDay;
-            document.getElementById('completedDays').textContent = ramadanDay - 1;
-            
-            // প্রোগ্রেস রিং
-            const progress = ((ramadanDay - 1) / 30) * 565.48;
-            document.getElementById('progressRing').style.strokeDashoffset = 565.48 - progress;
-            document.getElementById('progressPercentage').textContent = 
-                `${Math.round((ramadanDay - 1) / 30 * 100)}% সম্পন্ন`;
-            
-            // টাইম আপডেট
-            document.getElementById('sehriFixed').textContent = formatTime(timings.Fajr);
-            document.getElementById('iftarFixed').textContent = formatTime(timings.Maghrib);
-            
-            // নামাজের গ্রিড
-            const prayerGrid = document.getElementById('prayerGrid');
-            const prayers = [
-                { name: 'ফজর', time: timings.Fajr, icon: '🕋' },
-                { name: 'যোহর', time: timings.Dhuhr, icon: '☀️' },
-                { name: 'আছর', time: timings.Asr, icon: '⏳' },
-                { name: 'মাগরিব', time: timings.Maghrib, icon: '🌙' },
-                { name: 'এশা', time: timings.Isha, icon: '⭐' }
-            ];
-            
-            prayerGrid.innerHTML = prayers.map(prayer => `
-                <div class="prayer-card">
-                    <div class="prayer-icon">${prayer.icon}</div>
-                    <div class="prayer-name">${prayer.name}</div>
-                    <div class="prayer-time">${formatTime(prayer.time)}</div>
-                </div>
-            `).join('');
-        }
-
-        // কাউন্টডাউন শুরু
-        function startCountdown() {
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            
-            countdownInterval = setInterval(() => {
-                if (currentTimings) {
-                    updateCountdowns();
-                }
-            }, 1000);
-        }
-
-        // কাউন্টডাউন আপডেট
-        function updateCountdowns() {
-            const now = new Date();
-            
-            // সেহরি
-            if (currentTimings.Fajr) {
-                const fajrTime = currentTimings.Fajr.split(':');
-                const fajr = new Date();
-                fajr.setHours(parseInt(fajrTime[0]), parseInt(fajrTime[1]), 0);
-                
-                if (now > fajr) {
-                    fajr.setDate(fajr.getDate() + 1);
-                }
-                
-                updateSingleCountdown('sehri', now, fajr, 'সেহরি শেষ হতে');
-            }
-            
-            // ইফতার
-            if (currentTimings.Maghrib) {
-                const maghribTime = currentTimings.Maghrib.split(':');
-                const maghrib = new Date();
-                maghrib.setHours(parseInt(maghribTime[0]), parseInt(maghribTime[1]), 0);
-                
-                if (now > maghrib) {
-                    maghrib.setDate(maghrib.getDate() + 1);
-                }
-                
-                updateSingleCountdown('iftar', now, maghrib, 'ইফতার হতে');
-            }
-        }
-
-        // সিঙ্গেল কাউন্টডাউন আপডেট
-        function updateSingleCountdown(type, now, targetTime, label) {
-            const diff = targetTime - now;
-            
-            if (diff > 0) {
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                document.getElementById(`${type}Hours`).textContent = hours.toString().padStart(2, '0');
-                document.getElementById(`${type}Minutes`).textContent = minutes.toString().padStart(2, '0');
-                document.getElementById(`${type}Seconds`).textContent = seconds.toString().padStart(2, '0');
-                
-                let statusText = '';
-                if (hours > 0) {
-                    statusText = `${label} ${hours} ঘন্টা ${minutes} মিনিট ${seconds} সেকেন্ড বাকি`;
-                } else if (minutes > 0) {
-                    statusText = `${label} ${minutes} মিনিট ${seconds} সেকেন্ড বাকি`;
-                } else {
-                    statusText = `${label} ${seconds} সেকেন্ড বাকি`;
-                }
-                
-                document.getElementById(`${type}Status`).textContent = statusText;
-            } else {
-                document.getElementById(`${type}Hours`).textContent = '00';
-                document.getElementById(`${type}Minutes`).textContent = '00';
-                document.getElementById(`${type}Seconds`).textContent = '00';
-                
-                if (type === 'sehri') {
-                    document.getElementById('sehriStatus').textContent = '🌅 সেহরির সময় শেষ';
-                } else {
-                    document.getElementById('iftarStatus').textContent = '🌇 ইফতারের সময় হয়েছে! রোজা ভাঙুন';
-                }
-            }
-        }
-
-        // টাইম ফরম্যাট
-        function formatTime(time24) {
-            const [hour, minute] = time24.split(':');
-            const hourInt = parseInt(hour);
-            const period = hourInt >= 12 ? 'PM' : 'AM';
-            const hour12 = hourInt % 12 || 12;
-            return `${hour12}:${minute} ${period}`;
-        }
-
-        // শহর পরিবর্তন
-        function changeCity(city, country) {
-            currentCity = city;
-            currentCountry = country;
-            
-            document.querySelectorAll('.city-card').forEach(card => {
-                card.classList.remove('active');
-                if (card.textContent === cities.find(c => c.english === city).name) {
-                    card.classList.add('active');
-                }
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.nav-links a, .mobile-menu-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) link.classList.add('active');
             });
-            
-            getRamadanTimes(city, country);
         }
 
-        // ইনিশিয়ালাইজ
-        window.addEventListener('load', () => {
+        window.addEventListener('scroll', () => {
+            document.getElementById('backToTop').classList.toggle('show', window.scrollY > 500);
+        });
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function init() {
             generateCityGrid();
             generateDuaSlider();
-            loadQuiz();
-            getRamadanTimes('Dhaka', 'Bangladesh');
-            
-            // প্রতি ৫ মিনিটে রিফ্রেশ
-            setInterval(() => {
-                getRamadanTimes(currentCity, currentCountry);
-            }, 300000);
-        });
+            await getRamadanTimes(CONFIG.DEFAULT_CITY, CONFIG.DEFAULT_COUNTRY);
+            updateAllDisplays();
+            setInterval(updateCountdowns, 1000);
+            setInterval(() => getRamadanTimes(state.currentCity, 'Bangladesh'), 300000);
+        }
+
+        init();
     </script>
 </body>
 </html>
