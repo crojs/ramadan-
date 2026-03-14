@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ramadanty.netlify.app/sitemap.xml

@@ -2,284 +2,68 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="d65-sBvVulBlxFLQzlz-X7MFoewdhZaYgc4i-1GSTPA" />
-    <title>বাংলাদেশ রমাদান ক্যালেন্ডার | رمضان بنجلاديش | Bangladesh Ramadan</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
-        }
+    
+    <!-- Primary Meta Tags -->
+    <title>বাংলাদেশ রমাদান ক্যালেন্ডার ১৪৪৭ | সেহরি ও ইফতারের সময় | رمضان بنجلاديش</title>
+    <meta name="title" content="বাংলাদেশ রমাদান ক্যালেন্ডার ১৪৪৭ | সেহরি ও ইফতারের সময়">
+    <meta name="description" content="বাংলাদেশের ৮ বিভাগের জন্য নির্ভুল রমাদান ক্যালেন্ডার ১৪৪৭ হিজরি। সেহরি, ইফতার ও পাঁচ ওয়াক্ত নামাজের সময় ১২ ঘণ্টার ফরম্যাটে। আযান, কাউন্টডাউন ও আরও অনেক কিছু।">
+    <meta name="keywords" content="রমাদান ক্যালেন্ডার, সেহরির সময়, ইফতারের সময়, নামাজের সময়, বাংলাদেশ, ঢাকা, চট্টগ্রাম, সিলেট, রাজশাহী, খুলনা, বরিশাল, রংপুর, ময়মনসিংহ">
+    <meta name="author" content="ramadanty.netlify.app">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ramadanty.netlify.app/" />
+    
+    <!-- Hreflang -->
+    <link rel="alternate" href="https://ramadanty.netlify.app/" hreflang="bn" />
+    <link rel="alternate" href="https://ramadanty.netlify.app/" hreflang="en" />
+    <link rel="alternate" href="https://ramadanty.netlify.app/" hreflang="ar" />
+    <link rel="alternate" href="https://ramadanty.netlify.app/" hreflang="x-default" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ramadanty.netlify.app/">
+    <meta property="og:title" content="বাংলাদেশ রমাদান ক্যালেন্ডার ১৪৪৭">
+    <meta property="og:description" content="বাংলাদেশের ৮ বিভাগের জন্য সেহরি, ইফতার ও নামাজের সময় ১২ ঘণ্টা ফরম্যাটে, আযান ও কাউন্টডাউন সহ।">
+    <meta property="og:image" content="https://ramadanty.netlify.app/ramadan-preview.jpg">
+    <meta property="og:locale" content="bn_BD">
+    <meta property="og:site_name" content="Ramadan BD">
 
-        body {
-            background: linear-gradient(155deg, #eef5e8 0%, #dee8d5 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            direction: ltr;
-        }
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ramadanty.netlify.app/">
+    <meta property="twitter:title" content="বাংলাদেশ রমাদান ক্যালেন্ডার ১৪৪৭">
+    <meta property="twitter:description" content="সেহরি, ইফতার ও নামাজের সময় ১২ ঘণ্টা ফরম্যাটে, আযান ও কাউন্টডাউন সহ।">
+    <meta property="twitter:image" content="https://ramadanty.netlify.app/ramadan-preview.jpg">
 
-        .ramadan-card {
-            max-width: 780px;
-            width: 100%;
-            background: rgba(255, 255, 240, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 48px 48px 32px 32px;
-            box-shadow: 0 20px 40px -12px #2f4d3a66, 0 2px 8px #ebd5b0;
-            padding: 2rem 1.8rem;
-            border: 1px solid #f7edd9;
-        }
+    <!-- Favicon & Web App Manifest -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="RamadanBD" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1f4734">
 
-        /* header with location & lang — centered */
-        .top-bar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-        }
+    <!-- Fallback favicon emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
 
-        .location-selector {
-            background: #ffffffc0;
-            border-radius: 40px;
-            padding: 0.4rem 1.5rem;
-            border: 1px solid #c5b28b;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1f4734;
-            outline: none;
-            cursor: pointer;
-            text-align: center;
-            min-width: 200px;
-        }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-        .lang-nav {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: #2f4d3a;
-            cursor: pointer;
-            padding: 0.3rem 0.9rem;
-            border-radius: 40px;
-            font-size: 1rem;
-            opacity: 0.7;
-            transition: 0.1s;
-            white-space: nowrap;
-        }
-
-        .lang-btn.active {
-            background: #f3e9d6;
-            box-shadow: 0 2px 6px #ab9f81;
-            color: #0a3527;
-            opacity: 1;
-            font-weight: 550;
-        }
-
-        .current-time-box {
-            background: #fefcf5e0;
-            border-radius: 120px;
-            padding: 1.2rem 1.8rem;
-            margin-bottom: 1.8rem;
-            text-align: center;
-            border: 1px solid #e6d7bb;
-            box-shadow: inset 0 2px 6px #fffae5, 0 6px 12px #d0c0a2;
-        }
-
-        .gregorian-date {
-            font-size: 1.1rem;
-            color: #5a5a4a;
-            margin-bottom: 0.2rem;
-        }
-
-        .hijri-date {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #1d6b4c;
-            background: #ffeac9b0;
-            display: inline-block;
-            padding: 0.1rem 1.5rem;
-            border-radius: 40px;
-            margin-bottom: 0.6rem;
-        }
-
-        .live-clock {
-            font-size: 3.2rem;
-            font-weight: 520;
-            color: #13452e;
-            letter-spacing: 2px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .countdown-main {
-            background: #ebf3e1d0;
-            border-radius: 60px;
-            padding: 1.3rem 1rem;
-            margin-bottom: 2.3rem;
-            text-align: center;
-            border-left: 3px solid #b89360;
-            border-right: 3px solid #b89360;
-        }
-
-        .next-label {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #466b53;
-            font-weight: 400;
-        }
-
-        .next-name {
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: #946b32;
-            margin: 0.1rem 0 0.25rem;
-        }
-
-        .countdown-timer {
-            font-size: 2.8rem;
-            font-weight: 500;
-            color: #1f7237;
-            background: #ffffffee;
-            display: inline-block;
-            padding: 0.3rem 2.2rem;
-            border-radius: 80px;
-            box-shadow: 0 3px 8px #bb9f79;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .special-times {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .special-card {
-            background: #cde2cfd0;
-            border-radius: 60px;
-            padding: 0.9rem 1.6rem;
-            flex: 1 1 180px;
-            text-align: center;
-            box-shadow: 0 5px 10px #a99f86;
-        }
-
-        .special-label {
-            font-size: 1.2rem;
-            font-weight: 450;
-            color: #1d4a2d;
-        }
-
-        .special-value {
-            font-size: 2rem;
-            font-weight: 550;
-            color: #6a4520;
-            line-height: 1.4;
-        }
-
-        .special-note {
-            font-size: 0.9rem;
-            color: #1d5533;
-        }
-
-        .prayer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.9rem;
-            margin: 2rem 0 1.2rem;
-        }
-
-        .prayer-item {
-            background: #faf5e9f5;
-            border-radius: 40px;
-            padding: 0.8rem 0.2rem;
-            text-align: center;
-            border: 1px solid #dacfaf;
-            box-shadow: 0 2px 6px #ccbc9a;
-        }
-
-        .prayer-item.current {
-            background: #fde6c4;
-            border: 2px solid #b87c44;
-            box-shadow: 0 0 0 2px #fbe6bf;
-        }
-
-        .prayer-name {
-            font-size: 1.3rem;
-            font-weight: 520;
-            color: #2f3e2f;
-        }
-
-        .prayer-time {
-            font-size: 1.5rem;
-            font-weight: 550;
-            color: #0d442c;
-            line-height: 1.4;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .prayer-adhan {
-            font-size: 0.8rem;
-            background: #ddd2bc;
-            border-radius: 30px;
-            padding: 0.1rem 0.8rem;
-            border: none;
-            cursor: pointer;
-            color: #284d2b;
-            transition: 0.1s;
-            margin-top: 0.2rem;
-        }
-
-        .prayer-adhan:hover {
-            background: #c6a66b;
-            color: white;
-        }
-
-        .footnote {
-            text-align: center;
-            font-size: 0.7rem;
-            color: #4f6253;
-            margin-top: 1rem;
-        }
-
-        #adhanAudio {
-            display: none;
-        }
-
-        @media (max-width: 550px) {
-            .top-bar {
-                gap: 1rem;
-                flex-direction: column;
-            }
-            .location-selector {
-                width: 100%;
-                max-width: 280px;
-            }
-            .ramadan-card {
-                padding: 1rem;
-            }
-            .live-clock {
-                font-size: 2.5rem;
-            }
-            .countdown-timer {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="ramadan-card" id="mainCard">
-        <!-- বিভাগ নির্বাচক ও ভাষা (সেন্টার করা) -->
+    <h1 class="visually-hidden">বাংলাদেশ রমাদান ক্যালেন্ডার ১৪৪৭: সেহরি ও ইফতারের সময় এবং নামাজের সময়সূচী</h1>
+
+    <div class="ramadan-card">
         <div class="top-bar">
             <select id="divisionSelect" class="location-selector">
                 <option value="Dhaka">ঢাকা (Dhaka)</option>
@@ -291,42 +75,38 @@
                 <option value="Rangpur">রংপুর (Rangpur)</option>
                 <option value="Mymensingh">ময়মনসিংহ (Mymensingh)</option>
             </select>
-            <div class="lang-nav" id="langSwitcher">
+            <div class="lang-nav">
                 <button class="lang-btn active" data-lang="bn">বাংলা</button>
                 <button class="lang-btn" data-lang="en">English</button>
                 <button class="lang-btn" data-lang="ar">العربية</button>
             </div>
         </div>
 
-        <!-- বর্তমান তারিখ ও সময় (১২ ঘণ্টা) -->
         <div class="current-time-box">
             <div class="gregorian-date" id="displayGregorian">—</div>
             <div class="hijri-date" id="displayHijri">—</div>
             <div class="live-clock" id="liveClock">12:00:00 AM</div>
         </div>
 
-        <!-- কাউন্টডাউন -->
         <div class="countdown-main">
             <div class="next-label" id="nextEventLabel">পরবর্তী</div>
             <div class="next-name" id="nextEventName">—</div>
             <div class="countdown-timer" id="countdownDisplay">--:--:--</div>
         </div>
 
-        <!-- সেহরি ও ইফতার -->
         <div class="special-times">
-            <div class="special-card" id="sehriCard">
+            <div class="special-card">
                 <div class="special-label" id="sehriLabel">সেহরি</div>
                 <div class="special-value" id="sehriTime">--:-- --</div>
                 <div class="special-note" id="sehriNote">শেষ সময়</div>
             </div>
-            <div class="special-card" id="iftarCard">
+            <div class="special-card">
                 <div class="special-label" id="iftarLabel">ইফতার</div>
                 <div class="special-value" id="iftarTime">--:-- --</div>
                 <div class="special-note" id="iftarNote">মাগরিব</div>
             </div>
         </div>
 
-        <!-- নামাজের গ্রিড -->
         <div class="prayer-grid" id="prayerGrid"></div>
 
         <div class="footnote">
@@ -336,314 +116,20 @@
 
     <audio id="adhanAudio" src="https://www.islamcan.com/audio/adhan/azan1.mp3" preload="none"></audio>
 
-    <script>
-        (function() {
-            // ------------------- কনফিগারেশন --------------------
-            const PRAYER_KEYS = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
-            const PRAYER_NAMES = {
-                bn: ['ফজর', 'সূর্যোদয়', 'যোহর', 'আসর', 'মাগরিব', 'ইশা'],
-                en: ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
-                ar: ['الفجر', 'الشروق', 'الظهر', 'العصر', 'المغرب', 'العشاء']
-            };
-
-            const LABELS = {
-                bn: {
-                    next: 'পরবর্তী',
-                    sehri: 'সেহরি',
-                    iftar: 'ইফতার',
-                    sehriNote: 'শেষ সময়',
-                    iftarNote: 'মাগরিব',
-                    adhanBtn: 'আযান',
-                    justNow: 'এখন',
-                },
-                en: {
-                    next: 'Next',
-                    sehri: 'Sehri',
-                    iftar: 'Iftar',
-                    sehriNote: 'End time',
-                    iftarNote: 'Maghrib',
-                    adhanBtn: 'Adhan',
-                    justNow: 'Now',
-                },
-                ar: {
-                    next: 'التالي',
-                    sehri: 'السحور',
-                    iftar: 'الإفطار',
-                    sehriNote: 'وقت النهاية',
-                    iftarNote: 'المغرب',
-                    adhanBtn: 'أذان',
-                    justNow: 'الآن',
-                }
-            };
-
-            // ------------------- STATE -------------------------
-            let timings = null;
-            let currentLang = 'bn';
-            let currentDivision = 'Dhaka';
-            let activeAdhanPrayer = null;
-            let lastCheckedDate = '';
-
-            // DOM elements
-            const elGregorian = document.getElementById('displayGregorian');
-            const elHijri = document.getElementById('displayHijri');
-            const elLiveClock = document.getElementById('liveClock');
-            const elNextLabel = document.getElementById('nextEventLabel');
-            const elNextName = document.getElementById('nextEventName');
-            const elCountdown = document.getElementById('countdownDisplay');
-            const elSehriTime = document.getElementById('sehriTime');
-            const elIftarTime = document.getElementById('iftarTime');
-            const elSehriLabel = document.getElementById('sehriLabel');
-            const elIftarLabel = document.getElementById('iftarLabel');
-            const elSehriNote = document.getElementById('sehriNote');
-            const elIftarNote = document.getElementById('iftarNote');
-            const elLocationName = document.getElementById('locationName');
-            const prayerGrid = document.getElementById('prayerGrid');
-            const langBtns = document.querySelectorAll('.lang-btn');
-            const divisionSelect = document.getElementById('divisionSelect');
-            const adhanAudio = document.getElementById('adhanAudio');
-
-            // ------------------- ইউটিলিটি ---------------------
-            const twoDigits = (n) => (n < 10 ? '0' + n : n);
-
-            function format12Hour(time24) {
-                if (!time24) return '--:-- --';
-                const [hourStr, minute] = time24.split(':');
-                let hour = parseInt(hourStr, 10);
-                const ampm = hour >= 12 ? 'PM' : 'AM';
-                hour = hour % 12;
-                hour = hour ? hour : 12;
-                return `${twoDigits(hour)}:${minute} ${ampm}`;
-            }
-
-            function updateLiveClock12() {
-                const now = new Date();
-                let hours = now.getHours();
-                const minutes = twoDigits(now.getMinutes());
-                const seconds = twoDigits(now.getSeconds());
-                const ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12;
-                hours = hours ? hours : 12;
-                const time12 = `${twoDigits(hours)}:${minutes}:${seconds} ${ampm}`;
-                elLiveClock.innerText = time12;
-                return now;
-            }
-
-            function timeStrToDate(timeStr) {
-                const [h, m] = timeStr.split(':').map(Number);
-                const d = new Date();
-                d.setHours(h, m, 0, 0);
-                return d;
-            }
-
-            function getNextEvent(now, timingsObj) {
-                const events = [];
-                PRAYER_KEYS.forEach(key => {
-                    if (timingsObj[key]) {
-                        const eventTime = timeStrToDate(timingsObj[key]);
-                        events.push({ key, time: eventTime });
-                    }
-                });
-                events.sort((a,b) => a.time - b.time);
-                let next = null;
-                for (let e of events) {
-                    if (e.time > now) {
-                        next = e;
-                        break;
-                    }
-                }
-                if (!next && events.length) {
-                    const first = events[0];
-                    const tomorrow = new Date(first.time);
-                    tomorrow.setDate(tomorrow.getDate() + 1);
-                    next = { key: first.key, time: tomorrow };
-                }
-                return next;
-            }
-
-            function refreshCountdownAndHighlights() {
-                if (!timings) return;
-                const now = new Date();
-                const next = getNextEvent(now, timings);
-                if (!next) return;
-
-                const diffMs = next.time - now;
-                const diffSec = Math.floor(diffMs / 1000);
-                const hours = Math.floor(diffSec / 3600);
-                const minutes = Math.floor((diffSec % 3600) / 60);
-                const seconds = diffSec % 60;
-
-                if (diffSec <= 0) {
-                    elCountdown.innerText = LABELS[currentLang].justNow || '00:00:00';
-                } else {
-                    elCountdown.innerText = `${twoDigits(hours)}:${twoDigits(minutes)}:${twoDigits(seconds)}`;
-                }
-
-                const idx = PRAYER_KEYS.indexOf(next.key);
-                elNextName.innerText = idx !== -1 ? PRAYER_NAMES[currentLang][idx] : next.key;
-
-                const nowMins = now.getHours() * 60 + now.getMinutes();
-                let currentKey = null;
-                for (let i = PRAYER_KEYS.length-1; i>=0; i--) {
-                    const key = PRAYER_KEYS[i];
-                    if (!timings[key]) continue;
-                    const [h,m] = timings[key].split(':').map(Number);
-                    if (h*60+m <= nowMins) {
-                        currentKey = key;
-                        break;
-                    }
-                }
-                document.querySelectorAll('.prayer-item').forEach(item => {
-                    const pKey = item.dataset.prayerKey;
-                    if (pKey === currentKey) item.classList.add('current');
-                    else item.classList.remove('current');
-                });
-
-                const nowHour = now.getHours();
-                const nowMin = now.getMinutes();
-                const nowSec = now.getSeconds();
-                if (nowSec < 2 && timings) {
-                    for (let key of PRAYER_KEYS) {
-                        if (!timings[key]) continue;
-                        const [h,m] = timings[key].split(':').map(Number);
-                        if (h === nowHour && m === nowMin) {
-                            const todayStr = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-                            if (activeAdhanPrayer !== key + todayStr) {
-                                adhanAudio.currentTime = 0;
-                                adhanAudio.play().catch(e => console.log('play error', e));
-                                activeAdhanPrayer = key + todayStr;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-
-            function renderPrayerGrid() {
-                if (!timings) return;
-                let html = '';
-                PRAYER_KEYS.forEach((key, i) => {
-                    const time24 = timings[key] || '--:--';
-                    const time12 = format12Hour(time24);
-                    const name = PRAYER_NAMES[currentLang][i];
-                    html += `
-                        <div class="prayer-item" data-prayer-key="${key}">
-                            <div class="prayer-name">${name}</div>
-                            <div class="prayer-time">${time12}</div>
-                            <button class="prayer-adhan" data-key="${key}">🔊 ${LABELS[currentLang].adhanBtn}</button>
-                        </div>
-                    `;
-                });
-                prayerGrid.innerHTML = html;
-
-                document.querySelectorAll('.prayer-adhan').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        adhanAudio.currentTime = 0;
-                        adhanAudio.play().catch(() => {});
-                    });
-                });
-            }
-
-            function refreshLanguage() {
-                elNextLabel.innerText = LABELS[currentLang].next;
-                document.getElementById('sehriLabel').innerText = LABELS[currentLang].sehri;
-                document.getElementById('iftarLabel').innerText = LABELS[currentLang].iftar;
-                elSehriNote.innerText = LABELS[currentLang].sehriNote;
-                elIftarNote.innerText = LABELS[currentLang].iftarNote;
-                renderPrayerGrid();
-
-                if (timings) {
-                    const now = new Date();
-                    const next = getNextEvent(now, timings);
-                    if (next) {
-                        const idx = PRAYER_KEYS.indexOf(next.key);
-                        elNextName.innerText = idx !== -1 ? PRAYER_NAMES[currentLang][idx] : next.key;
-                    }
-                }
-
-                langBtns.forEach(btn => {
-                    const lang = btn.dataset.lang;
-                    if (lang === currentLang) btn.classList.add('active');
-                    else btn.classList.remove('active');
-                });
-            }
-
-            async function fetchTimings(division) {
-                const address = `${division}, Bangladesh`;
-                const url = `https://api.aladhan.com/v1/timingsByAddress?address=${encodeURIComponent(address)}&method=1`;
-
-                try {
-                    const resp = await fetch(url);
-                    const data = await resp.json();
-                    if (data.code === 200 && data.data) {
-                        timings = data.data.timings;
-                        const greg = data.data.date.gregorian;
-                        const hijri = data.data.date.hijri;
-                        elGregorian.innerText = greg.date;
-                        elHijri.innerText = `${hijri.day} ${hijri.month.en} ${hijri.year} AH`;
-
-                        elSehriTime.innerText = format12Hour(timings.Fajr);
-                        elIftarTime.innerText = format12Hour(timings.Maghrib);
-
-                        elLocationName.innerText = division;
-
-                        renderPrayerGrid();
-                        refreshCountdownAndHighlights();
-
-                        const today = new Date();
-                        const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
-                        if (lastCheckedDate !== todayStr) {
-                            activeAdhanPrayer = null;
-                            lastCheckedDate = todayStr;
-                        }
-                    }
-                } catch (err) {
-                    console.warn('API fetch failed, using fallback data for', division);
-                    timings = {
-                        Fajr: '04:45', Sunrise: '06:03', Dhuhr: '12:02',
-                        Asr: '15:26', Maghrib: '18:01', Isha: '19:20'
-                    };
-                    elGregorian.innerText = '14-03-2026';
-                    elHijri.innerText = '25 Ramadan 1447 AH';
-                    elSehriTime.innerText = format12Hour('04:45');
-                    elIftarTime.innerText = format12Hour('18:01');
-                    elLocationName.innerText = division;
-                    renderPrayerGrid();
-                }
-            }
-
-            async function init() {
-                divisionSelect.value = currentDivision;
-                await fetchTimings(currentDivision);
-
-                divisionSelect.addEventListener('change', async (e) => {
-                    currentDivision = e.target.value;
-                    await fetchTimings(currentDivision);
-                });
-
-                langBtns.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const lang = e.target.dataset.lang;
-                        if (lang) {
-                            currentLang = lang;
-                            refreshLanguage();
-                        }
-                    });
-                });
-
-                setInterval(() => {
-                    updateLiveClock12();
-                    if (timings) {
-                        refreshCountdownAndHighlights();
-                    }
-                }, 1000);
-
-                setInterval(() => {
-                    fetchTimings(currentDivision);
-                }, 30 * 60 * 1000);
-            }
-
-            init();
-        })();
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "বাংলাদেশ রমাদান ক্যালেন্ডার",
+        "alternateName": ["Ramadan Bangladesh Calendar", "رمضان بنجلاديش"],
+        "url": "https://ramadanty.netlify.app/",
+        "description": "বাংলাদেশের ৮ বিভাগের জন্য সেহরি, ইফতার ও পাঁচ ওয়াক্ত নামাজের সময় ১২ ঘণ্টা ফরম্যাটে। আযান, কাউন্টডাউন ও আরও অনেক কিছু।",
+        "inLanguage": ["bn", "en", "ar"]
+    }
     </script>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
