@@ -1,273 +1,371 @@
-// ===== আধুনিক রমাদান ক্যালেন্ডার JavaScript =====
-class RamadanCalendar {
-    constructor() {
-        // এলিমেন্ট সিলেক্ট করা
-        this.citySelect = document.getElementById('citySelect');
-        this.themeToggle = document.getElementById('themeToggle');
-        this.gregorianDate = document.getElementById('gregorianDate');
-        this.hijriDate = document.getElementById('hijriDate');
-        this.liveTime = document.getElementById('liveTime');
-        this.nextPrayer = document.getElementById('nextPrayer');
-        this.countdownTimer = document.getElementById('countdownTimer');
-        this.sehriTime = document.getElementById('sehriTime');
-        this.iftarTime = document.getElementById('iftarTime');
-        this.prayerGrid = document.getElementById('prayerGrid');
-        this.adhanAudio = document.getElementById('adhanAudio');
-
-        // ডাটা স্টেট
-        this.timings = null;
-        this.currentCity = 'dhaka';
-        this.is24Hour = false;
-        this.activeAdhan = null;
-
-        // নামাজের তালিকা
-        this.prayerNames = {
-            bn: ['ফজর', 'সূর্যোদয়', 'যোহর', 'আসর', 'মাগরিব', 'ইশা'],
-            en: ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']
-        };
-        this.prayerKeys = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
-
-        // লোকাল স্টোরেজ থেকে থিম লোড
-        this.loadTheme();
-        
-        // ইভেন্ট লিসেনার
-        this.initEventListeners();
-        
-        // ডাটা লোড
-        this.fetchTimings();
-        
-        // টাইমার শুরু
-        this.startClock();
-        this.startCountdown();
-    }
-
-    // থিম লোড করা
-    loadTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            this.themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+// Complete Azan System with Exact Timing
+class RamadanApp {
+  constructor() {
+    this.prayerTimesData = null;
+    this.selectedDivision = 'Dhaka';
+    this.timers = [];
+    this.azanEnabled = true;
+    this.audioContext = null;
+    this.azanPlayedToday = {};
+    this.currentAzanPlaying = null;
+    
+    this.prayerNames = {
+      Fajr: 'ফজর', Dhuhr: 'যোহর', Asr: 'আসর', Maghrib: 'মাগরিব', Isha: 'ইশা'
+    };
+    
+    this.init();
+  }
+  
+  init() {
+    this.setupEventListeners();
+    this.fetchTimes('Dhaka');
+    this.startClock();
+    this.initAudio();
+    this.resetAzanPlayed();
+  }
+  
+  // Reset azan played status at midnight
+  resetAzanPlayed() {
+    setInterval(() => {
+      const now = new Date();
+      if (now.getHours() === 0 && now.getMinutes() === 0) {
+        this.azanPlayedToday = {};
+        console.log('Azan status reset for new day');
+      }
+    }, 60000); // Check every minute
+  }
+  
+  // Initialize audio context for better playback
+  initAudio() {
+    try {
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      this.audioContext = new AudioContext();
+      
+      // Resume audio context on user interaction
+      document.addEventListener('click', () => {
+        if (this.audioContext && this.audioContext.state === 'suspended') {
+          this.audioContext.resume();
         }
+      }, { once: true });
+    } catch (e) {
+      console.log('AudioContext not supported');
     }
-
-    // ইভেন্ট লিসেনার
-    initEventListeners() {
-        // সিটি পরিবর্তন
-        this.citySelect.addEventListener('change', () => {
-            this.currentCity = this.citySelect.value;
-            this.fetchTimings();
+  }
+  
+  convertTo12Hour(time24) {
+    if (!time24) return '--:--';
+    const [h, m] = time24.split(':').map(Number);
+    const period = h >= 12 ? 'PM' : 'AM';
+    let hour12 = h % 12 || 12;
+    return `${hour12.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')} ${period}`;
+  }
+  
+  getCurrentBangladeshTime() {
+    return new Date().toLocaleTimeString('en-US', { 
+      timeZone: 'Asia/Dhaka',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
+    });
+  }
+  
+  setupEventListeners() {
+    document.getElementById('division').addEventListener('change', (e) => {
+      this.selectedDivision = e.target.value;
+      this.fetchTimes(this.selectedDivision);
+      this.azanPlayedToday = {}; // Reset for new location
+    });
+    
+    document.getElementById('toggleAzan').addEventListener('click', () => {
+      this.azanEnabled = !this.azanEnabled;
+      const btn = document.getElementById('toggleAzan');
+      const status = document.getElementById('azanStatus');
+      
+      if (this.azanEnabled) {
+        btn.textContent = 'আজান চালু';
+        btn.classList.remove('off');
+        status.textContent = 'আজান সক্রিয়';
+        status.style.background = 'var(--accent)';
+      } else {
+        btn.textContent = 'আজান বন্ধ';
+        btn.classList.add('off');
+        status.textContent = 'আজান নিষ্ক্রিয়';
+        status.style.background = 'var(--danger)';
+      }
+    });
+  }
+  
+  async fetchTimes(city) {
+    try {
+      const res = await fetch(
+        `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=Bangladesh&method=99&methodSettings=18.5,null,17.5`
+      );
+      const data = await res.json();
+      if (data.code === 200) {
+        this.prayerTimesData = data.data;
+        this.updateUI();
+        
+        // Show success message
+        document.getElementById('azanStatus').textContent = `${city} এর সময় লোড হয়েছে`;
+        setTimeout(() => {
+          document.getElementById('azanStatus').textContent = this.azanEnabled ? 'আজান সক্রিয়' : 'আজান নিষ্ক্রিয়';
+        }, 2000);
+      } else {
+        this.useFallbackData();
+      }
+    } catch {
+      this.useFallbackData();
+    }
+  }
+  
+  useFallbackData() {
+    this.prayerTimesData = {
+      timings: {
+        Imsak: '04:18', Fajr: '04:28', Dhuhr: '12:01',
+        Asr: '15:30', Maghrib: '18:10', Isha: '19:40'
+      }
+    };
+    this.updateUI();
+    
+    document.getElementById('azanStatus').textContent = 'ডেমো ডেটা';
+    setTimeout(() => {
+      document.getElementById('azanStatus').textContent = this.azanEnabled ? 'আজান সক্রিয়' : 'আজান নিষ্ক্রিয়';
+    }, 2000);
+  }
+  
+  updateUI() {
+    const t = this.prayerTimesData.timings;
+    document.getElementById('sehriTime').textContent = this.convertTo12Hour(t.Imsak);
+    document.getElementById('iftarTime').textContent = this.convertTo12Hour(t.Maghrib);
+    this.updatePrayerGrid();
+    this.startCountdowns();
+  }
+  
+  updatePrayerGrid() {
+    const t = this.prayerTimesData.timings;
+    const prayers = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+    
+    let html = '';
+    prayers.forEach(p => {
+      html += `
+        <div class="prayer-item" data-prayer="${p}" data-time="${t[p]}">
+          <div class="prayer-name">${this.prayerNames[p]}</div>
+          <div class="prayer-time">${this.convertTo12Hour(t[p])}</div>
+          <div class="prayer-countdown" id="countdown-${p}">--:--:--</div>
+        </div>
+      `;
+    });
+    
+    document.getElementById('prayerTimesGrid').innerHTML = html;
+  }
+  
+  getNextEvent() {
+    const now = new Date();
+    const banglaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Dhaka' }));
+    const current = banglaTime.getHours() * 60 + banglaTime.getMinutes();
+    
+    const imsak = this.timeToMinutes(this.prayerTimesData?.timings.Imsak || '04:18');
+    const maghrib = this.timeToMinutes(this.prayerTimesData?.timings.Maghrib || '18:10');
+    
+    if (current < imsak) return { name: 'সেহরি শেষ', time: this.prayerTimesData.timings.Imsak };
+    if (current < maghrib) return { name: 'ইফতার', time: this.prayerTimesData.timings.Maghrib };
+    return { name: 'আগামীকাল সেহরি', time: this.prayerTimesData.timings.Imsak, tomorrow: true };
+  }
+  
+  timeToMinutes(t) {
+    const [h, m] = t.split(':').map(Number);
+    return h * 60 + m;
+  }
+  
+  // Play Azan with exact timing
+  playAzan(prayer) {
+    if (!this.azanEnabled) return;
+    
+    const today = new Date().toDateString();
+    const prayerKey = `${prayer}-${today}`;
+    
+    // Check if already played today
+    if (this.azanPlayedToday[prayerKey]) {
+      console.log(`${prayer} আজান ইতিমধ্যে বাজানো হয়েছে`);
+      return;
+    }
+    
+    // Get current time in Bangladesh
+    const now = new Date();
+    const banglaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Dhaka' }));
+    const currentMinutes = banglaTime.getHours() * 60 + banglaTime.getMinutes();
+    const prayerMinutes = this.timeToMinutes(this.prayerTimesData.timings[prayer]);
+    
+    // Exact time check (within 1 minute window)
+    if (Math.abs(currentMinutes - prayerMinutes) > 1) {
+      console.log(`${prayer} এর সঠিক সময় নয়`);
+      return;
+    }
+    
+    // Mark as played
+    this.azanPlayedToday[prayerKey] = true;
+    this.currentAzanPlaying = prayer;
+    
+    // Update UI
+    const status = document.getElementById('azanStatus');
+    const prayerElement = document.querySelector(`[data-prayer="${prayer}"]`);
+    
+    status.textContent = `${this.prayerNames[prayer]} এর আজান বাজছে`;
+    status.classList.add('playing');
+    
+    if (prayerElement) {
+      prayerElement.classList.add('azan-active');
+      
+      // Add badge
+      const badge = document.createElement('div');
+      badge.className = 'azan-badge';
+      badge.textContent = 'আজান';
+      prayerElement.appendChild(badge);
+    }
+    
+    // Try multiple audio sources for reliability
+    this.playAudioWithFallback();
+    
+    // Remove effects after azan finishes (about 3 minutes)
+    setTimeout(() => {
+      status.classList.remove('playing');
+      status.textContent = this.azanEnabled ? 'আজান সক্রিয়' : 'আজান নিষ্ক্রিয়';
+      
+      if (prayerElement) {
+        prayerElement.classList.remove('azan-active');
+        const badge = prayerElement.querySelector('.azan-badge');
+        if (badge) badge.remove();
+      }
+      
+      this.currentAzanPlaying = null;
+    }, 180000); // 3 minutes
+  }
+  
+  // Play audio with multiple fallback options
+  playAudioWithFallback() {
+    const primaryAudio = document.getElementById('adhanAudio');
+    const fallbackAudio = document.getElementById('adhanFallbackAudio');
+    
+    // Try primary audio
+    primaryAudio.volume = 1.0;
+    primaryAudio.currentTime = 0;
+    
+    const playPromise = primaryAudio.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Primary audio failed, trying fallback:', error);
+        
+        // Try fallback audio
+        fallbackAudio.volume = 1.0;
+        fallbackAudio.currentTime = 0;
+        fallbackAudio.play().catch(e => {
+          console.log('Fallback audio also failed:', e);
+          
+          // Show alert for user interaction
+          const status = document.getElementById('azanStatus');
+          status.textContent = 'আজান বাজাতে ক্লিক করুন';
+          
+          // Create manual play button
+          const manualBtn = document.createElement('button');
+          manualBtn.textContent = 'আজান বাজান';
+          manualBtn.style.cssText = `
+            background: white;
+            color: var(--accent);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 20px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+          `;
+          
+          manualBtn.onclick = () => {
+            primaryAudio.play();
+            manualBtn.remove();
+            status.textContent = 'আজান বাজছে';
+          };
+          
+          status.appendChild(manualBtn);
         });
-
-        // থিম টগল
-        this.themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            this.themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        });
+      });
     }
-
-    // API থেকে টাইমিং আনা
-    async fetchTimings() {
-        try {
-            const url = `https://api.aladhan.com/v1/timingsByCity?city=${this.currentCity}&country=Bangladesh&method=1`;
-            const response = await fetch(url);
-            const data = await response.json();
-            
-            if (data.code === 200) {
-                this.timings = data.data.timings;
-                this.updateDates(data.data.date);
-                this.updateSehriIftar();
-                this.renderPrayerGrid();
-            }
-        } catch (error) {
-            console.error('API fetch failed:', error);
-            // ফallback ডাটা
-            this.useFallbackData();
-        }
+  }
+  
+  updateCountdowns() {
+    if (!this.prayerTimesData) return;
+    
+    const now = new Date();
+    const banglaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Dhaka' }));
+    const currentMinutes = banglaTime.getHours() * 60 + banglaTime.getMinutes();
+    const currentSeconds = banglaTime.getSeconds();
+    
+    // Main event
+    const next = this.getNextEvent();
+    let target = this.timeToMinutes(next.time);
+    if (next.tomorrow) target += 1440;
+    
+    let diff = target - currentMinutes;
+    if (diff < 0) diff += 1440;
+    
+    const h = Math.floor(diff / 60);
+    const m = diff % 60;
+    const s = 59 - currentSeconds;
+    
+    document.getElementById('nextEventTimer').textContent = 
+      `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    document.getElementById('nextEventName').textContent = next.name;
+    
+    // Prayer countdowns and azan check
+    const prayers = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+    let nextPrayer = null;
+    let minDiff = Infinity;
+    
+    prayers.forEach(p => {
+      const prayerTime = this.prayerTimesData.timings[p];
+      let pMins = this.timeToMinutes(prayerTime);
+      if (pMins < currentMinutes) pMins += 1440;
+      
+      const diff = pMins - currentMinutes;
+      const el = document.getElementById(`countdown-${p}`);
+      if (el) {
+        el.textContent = `${Math.floor(diff/60).toString().padStart(2,'0')}:${(diff%60).toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+      }
+      
+      if (diff < minDiff && diff > 0) {
+        minDiff = diff;
+        nextPrayer = p;
+      }
+      
+      // EXACT AZAN CHECK - at the exact minute and second 0
+      if (currentMinutes === this.timeToMinutes(prayerTime) && currentSeconds === 0) {
+        this.playAzan(p);
+      }
+    });
+    
+    // Highlight next prayer
+    document.querySelectorAll('.prayer-item').forEach(el => {
+      el.classList.remove('next-prayer');
+    });
+    
+    if (nextPrayer && !this.currentAzanPlaying) {
+      const nextEl = document.querySelector(`[data-prayer="${nextPrayer}"]`);
+      if (nextEl) nextEl.classList.add('next-prayer');
     }
-
-    // ফallback ডাটা
-    useFallbackData() {
-        this.timings = {
-            Fajr: '04:30',
-            Sunrise: '05:55',
-            Dhuhr: '12:00',
-            Asr: '15:30',
-            Maghrib: '18:15',
-            Isha: '19:30'
-        };
-        this.gregorianDate.textContent = '১৫ মার্চ ২০২৬';
-        this.hijriDate.textContent = '২৫ রমাদান ১৪৪৭';
-        this.updateSehriIftar();
-        this.renderPrayerGrid();
-    }
-
-    // তারিখ আপডেট
-    updateDates(dateData) {
-        if (dateData) {
-            this.gregorianDate.textContent = dateData.gregorian.date;
-            this.hijriDate.textContent = `${dateData.hijri.day} ${dateData.hijri.month.en} ${dateData.hijri.year} AH`;
-        }
-    }
-
-    // সেহরি ও ইফতার আপডেট
-    updateSehriIftar() {
-        if (this.timings) {
-            this.sehriTime.textContent = this.formatTime(this.timings.Fajr);
-            this.iftarTime.textContent = this.formatTime(this.timings.Maghrib);
-        }
-    }
-
-    // টাইম ফরম্যাট (১২/২৪ ঘণ্টা)
-    formatTime(time24) {
-        if (!time24) return '--:--';
-        
-        let [hours, minutes] = time24.split(':');
-        hours = parseInt(hours);
-        
-        if (this.is24Hour) {
-            return `${hours.toString().padStart(2, '0')}:${minutes}`;
-        } else {
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            return `${hours.toString().padStart(2, '0')}:${minutes} ${ampm}`;
-        }
-    }
-
-    // নামাজের গ্রিড রেন্ডার
-    renderPrayerGrid() {
-        if (!this.timings) return;
-        
-        let html = '';
-        this.prayerKeys.forEach((key, index) => {
-            html += `
-                <div class="prayer-item" data-prayer="${key}">
-                    <div class="prayer-name">${this.prayerNames.bn[index]}</div>
-                    <div class="prayer-time">${this.formatTime(this.timings[key])}</div>
-                    <button class="prayer-adhan" data-key="${key}">
-                        <i class="fas fa-volume-up"></i> আযান
-                    </button>
-                </div>
-            `;
-        });
-        
-        this.prayerGrid.innerHTML = html;
-        
-        // আযান বাটনে ক্লিক ইভেন্ট
-        document.querySelectorAll('.prayer-adhan').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.playAdhan();
-            });
-        });
-    }
-
-    // আযান বাজানো
-    playAdhan() {
-        this.adhanAudio.src = 'https://www.islamcan.com/audio/adhan/azan1.mp3';
-        this.adhanAudio.play().catch(() => {});
-    }
-
-    // ক্লক চালু করা
-    startClock() {
-        setInterval(() => {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            
-            if (this.is24Hour) {
-                this.liveTime.textContent = `${hours.toString().padStart(2, '0')}:${minutes}:${seconds}`;
-            } else {
-                const ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12 || 12;
-                this.liveTime.textContent = `${hours.toString().padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
-            }
-        }, 1000);
-    }
-
-    // কাউন্টডাউন শুরু
-    startCountdown() {
-        setInterval(() => {
-            if (!this.timings) return;
-            
-            const now = new Date();
-            let nextEvent = this.getNextEvent(now);
-            
-            if (nextEvent) {
-                const diff = nextEvent.time - now;
-                const hours = Math.floor(diff / 3600000);
-                const minutes = Math.floor((diff % 3600000) / 60000);
-                const seconds = Math.floor((diff % 60000) / 1000);
-                
-                this.countdownTimer.textContent = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                this.nextPrayer.textContent = this.prayerNames.bn[this.prayerKeys.indexOf(nextEvent.key)];
-                
-                // বর্তমান ওয়াক্ত হাইলাইট
-                this.highlightCurrentPrayer(now);
-                
-                // আযান চেক (শুধু মিনিটের শুরুতে)
-                if (seconds === 0 && minutes === 0) {
-                    this.checkAdhanTrigger(now, nextEvent.key);
-                }
-            }
-        }, 1000);
-    }
-
-    // পরবর্তী ওয়াক্ত বের করা
-    getNextEvent(now) {
-        const events = this.prayerKeys.map(key => ({
-            key,
-            time: this.timeToDate(this.timings[key])
-        })).sort((a, b) => a.time - b.time);
-        
-        return events.find(e => e.time > now) || events[0];
-    }
-
-    // টাইম স্ট্রিংকে ডেটে রূপান্তর
-    timeToDate(timeStr) {
-        const [h, m] = timeStr.split(':').map(Number);
-        const d = new Date();
-        d.setHours(h, m, 0, 0);
-        return d;
-    }
-
-    // বর্তমান ওয়াক্ত হাইলাইট
-    highlightCurrentPrayer(now) {
-        const currentHour = now.getHours();
-        const currentMin = now.getMinutes();
-        const currentTotal = currentHour * 60 + currentMin;
-        
-        let currentKey = null;
-        for (let i = this.prayerKeys.length - 1; i >= 0; i--) {
-            const key = this.prayerKeys[i];
-            const [h, m] = this.timings[key].split(':').map(Number);
-            if (h * 60 + m <= currentTotal) {
-                currentKey = key;
-                break;
-            }
-        }
-        
-        document.querySelectorAll('.prayer-item').forEach(item => {
-            const key = item.dataset.prayer;
-            item.classList.toggle('current', key === currentKey);
-        });
-    }
-
-    // আযান ট্রিগার চেক
-    checkAdhanTrigger(now, nextKey) {
-        const today = now.toDateString();
-        if (this.activeAdhan !== nextKey + today) {
-            this.playAdhan();
-            this.activeAdhan = nextKey + today;
-        }
-    }
+  }
+  
+  startClock() {
+    setInterval(() => {
+      document.getElementById('digitalClock').textContent = this.getCurrentBangladeshTime();
+    }, 1000);
+  }
+  
+  startCountdowns() {
+    if (this.timers.length) this.timers.forEach(t => clearInterval(t));
+    this.timers.push(setInterval(() => this.updateCountdowns(), 1000));
+    this.updateCountdowns();
+  }
 }
 
-// ক্যালেন্ডার শুরু করা
+// Start app
 document.addEventListener('DOMContentLoaded', () => {
-    new RamadanCalendar();
+  new RamadanApp();
 });

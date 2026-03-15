@@ -1,83 +1,79 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আধুনিক রমাদান ক্যালেন্ডার ১৪৪৭</title>
-    <meta name="description" content="আধুনিক ডিজাইনে বাংলাদেশের ৮ বিভাগের রমাদান ক্যালেন্ডার। সেহরি, ইফতার ও নামাজের সময়।">
-    <link rel="stylesheet" href="style.css">
-    <!-- ফন্ট অ্যাওসাম (ঐচ্ছিক) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>রমাদানTy - আজান সহ রমজান ক্যালেন্ডার</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- হেডার সেকশন -->
-        <header class="header">
-            <div class="logo">
-                <i class="fas fa-moon"></i>
-                <span>রমাদান ১৪৪৭</span>
-            </div>
-            <div class="header-controls">
-                <select id="citySelect" class="city-select">
-                    <option value="dhaka">ঢাকা</option>
-                    <option value="chittagong">চট্টগ্রাম</option>
-                    <option value="rajshahi">রাজশাহী</option>
-                    <option value="khulna">খুলনা</option>
-                    <option value="barisal">বরিশাল</option>
-                    <option value="sylhet">সিলেট</option>
-                    <option value="rangpur">রংপুর</option>
-                    <option value="mymensingh">ময়মনসিংহ</option>
-                </select>
-                <button id="themeToggle" class="theme-btn">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </header>
-
-        <!-- ডেট ও টাইম কার্ড -->
-        <div class="datetime-card">
-            <div class="gregorian-date" id="gregorianDate">২৩ মার্চ ২০২৬</div>
-            <div class="hijri-date" id="hijriDate">২৫ রমাদান ১৪৪৭</div>
-            <div class="live-time" id="liveTime">১২:৩০:২৫ PM</div>
-        </div>
-
-        <!-- কাউন্টডাউন সেকশন (গোলাকার ডিজাইন বাদ) -->
-        <div class="countdown-section">
-            <div class="next-prayer-label">পরবর্তী ওয়াক্ত</div>
-            <div class="next-prayer-name" id="nextPrayer">মাগরিব</div>
-            <div class="countdown-timer" id="countdownTimer">০২:৩০:১৫</div>
-        </div>
-
-        <!-- সেহরি-ইফতার কার্ড -->
-        <div class="meal-cards">
-            <div class="meal-card sehri">
-                <div class="meal-icon"><i class="fas fa-utensils"></i></div>
-                <div class="meal-label">সেহরি</div>
-                <div class="meal-time" id="sehriTime">০৪:২৫ AM</div>
-                <div class="meal-note">শেষ সময়</div>
-            </div>
-            <div class="meal-card iftar">
-                <div class="meal-icon"><i class="fas fa-mug-hot"></i></div>
-                <div class="meal-label">ইফতার</div>
-                <div class="meal-time" id="iftarTime">০৬:১৮ PM</div>
-                <div class="meal-note">মাগরিব</div>
-            </div>
-        </div>
-
-        <!-- নামাজের সময় গ্রিড -->
-        <div class="prayer-grid" id="prayerGrid">
-            <!-- জাভাস্ক্রিপ্ট দিয়ে ডায়নামিকভাবে পূরণ হবে -->
-        </div>
-
-        <!-- ফুটার -->
-        <footer class="footer">
-            <p>© ২০২৬ - আধুনিক রমাদান ক্যালেন্ডার | বাংলাদেশ</p>
-        </footer>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">রমাদান<span>Ty</span></div>
+      <div class="current-time" id="digitalClock">--:--:-- --</div>
     </div>
 
-    <!-- অডিও এলিমেন্ট (আযানের জন্য) -->
-    <audio id="adhanAudio" preload="none"></audio>
+    <!-- Location -->
+    <div class="location-section">
+      <select id="division" class="division-select">
+        <option value="Dhaka">ঢাকা</option>
+        <option value="Chittagong">চট্টগ্রাম</option>
+        <option value="Khulna">খুলনা</option>
+        <option value="Rajshahi">রাজশাহী</option>
+        <option value="Barisal">বরিশাল</option>
+        <option value="Sylhet">সিলেট</option>
+        <option value="Rangpur">রংপুর</option>
+        <option value="Mymensingh">ময়মনসিংহ</option>
+      </select>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- Azan Status -->
+    <div class="azan-status" id="azanStatus">আজান সক্রিয়</div>
+
+    <!-- Main Countdown -->
+    <div class="countdown-card">
+      <div class="countdown-timer" id="nextEventTimer">--:--:--</div>
+      <div class="countdown-event" id="nextEventName">সেহরি</div>
+    </div>
+
+    <!-- Sehri & Iftar -->
+    <div class="row">
+      <div class="time-card">
+        <div class="time-card-title">সেহরি শেষ</div>
+        <div class="time-card-value" id="sehriTime">--:--</div>
+      </div>
+      <div class="time-card">
+        <div class="time-card-title">ইফতার</div>
+        <div class="time-card-value" id="iftarTime">--:--</div>
+      </div>
+    </div>
+
+    <!-- Prayer Times with Azan Indicators -->
+    <div class="prayer-grid" id="prayerTimesGrid"></div>
+
+    <!-- Azan Control -->
+    <div class="azan-control">
+      <button class="azan-toggle-btn" id="toggleAzan">আজান চালু</button>
+    </div>
+
+    <!-- Audio for Adhan - Multiple sources for reliability -->
+    <audio id="adhanAudio" preload="auto">
+      <source src="https://www.islamcan.com/audio/adhan/azan1.mp3" type="audio/mpeg">
+      <source src="https://www.islamcan.com/audio/adhan/azan1.ogg" type="audio/ogg">
+      <source src="https://download.quranicaudio.com/qad/adan_makkah.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Fallback Audio for reliability -->
+    <audio id="adhanFallbackAudio" preload="auto" style="display:none">
+      <source src="https://www.islamcan.com/audio/adhan/azan1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="footer-note">
+      <p>বাংলাদেশ সময় | পাঁচ ওয়াক্ত আজান</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
