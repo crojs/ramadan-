@@ -1,307 +1,273 @@
-(function() {
-    // ------------------- কনফিগারেশন --------------------
-    const PRAYER_KEYS = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
-    const PRAYER_NAMES = {
-        bn: ['ফজর', 'সূর্যোদয়', 'যোহর', 'আসর', 'মাগরিব', 'ইশা'],
-        en: ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'],
-        ar: ['الفجر', 'الشروق', 'الظهر', 'العصر', 'المغرب', 'العشاء']
-    };
+// ===== আধুনিক রমাদান ক্যালেন্ডার JavaScript =====
+class RamadanCalendar {
+    constructor() {
+        // এলিমেন্ট সিলেক্ট করা
+        this.citySelect = document.getElementById('citySelect');
+        this.themeToggle = document.getElementById('themeToggle');
+        this.gregorianDate = document.getElementById('gregorianDate');
+        this.hijriDate = document.getElementById('hijriDate');
+        this.liveTime = document.getElementById('liveTime');
+        this.nextPrayer = document.getElementById('nextPrayer');
+        this.countdownTimer = document.getElementById('countdownTimer');
+        this.sehriTime = document.getElementById('sehriTime');
+        this.iftarTime = document.getElementById('iftarTime');
+        this.prayerGrid = document.getElementById('prayerGrid');
+        this.adhanAudio = document.getElementById('adhanAudio');
 
-    const LABELS = {
-        bn: {
-            next: 'পরবর্তী',
-            sehri: 'সেহরি',
-            iftar: 'ইফতার',
-            sehriNote: 'শেষ সময়',
-            iftarNote: 'মাগরিব',
-            adhanBtn: 'আযান',
-            justNow: 'এখন',
-        },
-        en: {
-            next: 'Next',
-            sehri: 'Sehri',
-            iftar: 'Iftar',
-            sehriNote: 'End time',
-            iftarNote: 'Maghrib',
-            adhanBtn: 'Adhan',
-            justNow: 'Now',
-        },
-        ar: {
-            next: 'التالي',
-            sehri: 'السحور',
-            iftar: 'الإفطار',
-            sehriNote: 'وقت النهاية',
-            iftarNote: 'المغرب',
-            adhanBtn: 'أذان',
-            justNow: 'الآن',
+        // ডাটা স্টেট
+        this.timings = null;
+        this.currentCity = 'dhaka';
+        this.is24Hour = false;
+        this.activeAdhan = null;
+
+        // নামাজের তালিকা
+        this.prayerNames = {
+            bn: ['ফজর', 'সূর্যোদয়', 'যোহর', 'আসর', 'মাগরিব', 'ইশা'],
+            en: ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']
+        };
+        this.prayerKeys = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+
+        // লোকাল স্টোরেজ থেকে থিম লোড
+        this.loadTheme();
+        
+        // ইভেন্ট লিসেনার
+        this.initEventListeners();
+        
+        // ডাটা লোড
+        this.fetchTimings();
+        
+        // টাইমার শুরু
+        this.startClock();
+        this.startCountdown();
+    }
+
+    // থিম লোড করা
+    loadTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            this.themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
-    };
-
-    // ------------------- STATE -------------------------
-    let timings = null;
-    let currentLang = 'bn';
-    let currentDivision = 'Dhaka';
-    let activeAdhanPrayer = null;
-    let lastCheckedDate = '';
-
-    // DOM elements
-    const elGregorian = document.getElementById('displayGregorian');
-    const elHijri = document.getElementById('displayHijri');
-    const elLiveClock = document.getElementById('liveClock');
-    const elNextLabel = document.getElementById('nextEventLabel');
-    const elNextName = document.getElementById('nextEventName');
-    const elCountdown = document.getElementById('countdownDisplay');
-    const elSehriTime = document.getElementById('sehriTime');
-    const elIftarTime = document.getElementById('iftarTime');
-    const elSehriLabel = document.getElementById('sehriLabel');
-    const elIftarLabel = document.getElementById('iftarLabel');
-    const elSehriNote = document.getElementById('sehriNote');
-    const elIftarNote = document.getElementById('iftarNote');
-    const elLocationName = document.getElementById('locationName');
-    const prayerGrid = document.getElementById('prayerGrid');
-    const langBtns = document.querySelectorAll('.lang-btn');
-    const divisionSelect = document.getElementById('divisionSelect');
-    const adhanAudio = document.getElementById('adhanAudio');
-
-    // ------------------- ইউটিলিটি ---------------------
-    const twoDigits = (n) => (n < 10 ? '0' + n : n);
-
-    function format12Hour(time24) {
-        if (!time24) return '--:-- --';
-        const [hourStr, minute] = time24.split(':');
-        let hour = parseInt(hourStr, 10);
-        const ampm = hour >= 12 ? 'PM' : 'AM';
-        hour = hour % 12;
-        hour = hour ? hour : 12;
-        return `${twoDigits(hour)}:${minute} ${ampm}`;
     }
 
-    function updateLiveClock12() {
-        const now = new Date();
-        let hours = now.getHours();
-        const minutes = twoDigits(now.getMinutes());
-        const seconds = twoDigits(now.getSeconds());
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12;
-        const time12 = `${twoDigits(hours)}:${minutes}:${seconds} ${ampm}`;
-        elLiveClock.innerText = time12;
-        return now;
+    // ইভেন্ট লিসেনার
+    initEventListeners() {
+        // সিটি পরিবর্তন
+        this.citySelect.addEventListener('change', () => {
+            this.currentCity = this.citySelect.value;
+            this.fetchTimings();
+        });
+
+        // থিম টগল
+        this.themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            this.themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
     }
 
-    function timeStrToDate(timeStr) {
+    // API থেকে টাইমিং আনা
+    async fetchTimings() {
+        try {
+            const url = `https://api.aladhan.com/v1/timingsByCity?city=${this.currentCity}&country=Bangladesh&method=1`;
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if (data.code === 200) {
+                this.timings = data.data.timings;
+                this.updateDates(data.data.date);
+                this.updateSehriIftar();
+                this.renderPrayerGrid();
+            }
+        } catch (error) {
+            console.error('API fetch failed:', error);
+            // ফallback ডাটা
+            this.useFallbackData();
+        }
+    }
+
+    // ফallback ডাটা
+    useFallbackData() {
+        this.timings = {
+            Fajr: '04:30',
+            Sunrise: '05:55',
+            Dhuhr: '12:00',
+            Asr: '15:30',
+            Maghrib: '18:15',
+            Isha: '19:30'
+        };
+        this.gregorianDate.textContent = '১৫ মার্চ ২০২৬';
+        this.hijriDate.textContent = '২৫ রমাদান ১৪৪৭';
+        this.updateSehriIftar();
+        this.renderPrayerGrid();
+    }
+
+    // তারিখ আপডেট
+    updateDates(dateData) {
+        if (dateData) {
+            this.gregorianDate.textContent = dateData.gregorian.date;
+            this.hijriDate.textContent = `${dateData.hijri.day} ${dateData.hijri.month.en} ${dateData.hijri.year} AH`;
+        }
+    }
+
+    // সেহরি ও ইফতার আপডেট
+    updateSehriIftar() {
+        if (this.timings) {
+            this.sehriTime.textContent = this.formatTime(this.timings.Fajr);
+            this.iftarTime.textContent = this.formatTime(this.timings.Maghrib);
+        }
+    }
+
+    // টাইম ফরম্যাট (১২/২৪ ঘণ্টা)
+    formatTime(time24) {
+        if (!time24) return '--:--';
+        
+        let [hours, minutes] = time24.split(':');
+        hours = parseInt(hours);
+        
+        if (this.is24Hour) {
+            return `${hours.toString().padStart(2, '0')}:${minutes}`;
+        } else {
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            return `${hours.toString().padStart(2, '0')}:${minutes} ${ampm}`;
+        }
+    }
+
+    // নামাজের গ্রিড রেন্ডার
+    renderPrayerGrid() {
+        if (!this.timings) return;
+        
+        let html = '';
+        this.prayerKeys.forEach((key, index) => {
+            html += `
+                <div class="prayer-item" data-prayer="${key}">
+                    <div class="prayer-name">${this.prayerNames.bn[index]}</div>
+                    <div class="prayer-time">${this.formatTime(this.timings[key])}</div>
+                    <button class="prayer-adhan" data-key="${key}">
+                        <i class="fas fa-volume-up"></i> আযান
+                    </button>
+                </div>
+            `;
+        });
+        
+        this.prayerGrid.innerHTML = html;
+        
+        // আযান বাটনে ক্লিক ইভেন্ট
+        document.querySelectorAll('.prayer-adhan').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.playAdhan();
+            });
+        });
+    }
+
+    // আযান বাজানো
+    playAdhan() {
+        this.adhanAudio.src = 'https://www.islamcan.com/audio/adhan/azan1.mp3';
+        this.adhanAudio.play().catch(() => {});
+    }
+
+    // ক্লক চালু করা
+    startClock() {
+        setInterval(() => {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            if (this.is24Hour) {
+                this.liveTime.textContent = `${hours.toString().padStart(2, '0')}:${minutes}:${seconds}`;
+            } else {
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12 || 12;
+                this.liveTime.textContent = `${hours.toString().padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
+            }
+        }, 1000);
+    }
+
+    // কাউন্টডাউন শুরু
+    startCountdown() {
+        setInterval(() => {
+            if (!this.timings) return;
+            
+            const now = new Date();
+            let nextEvent = this.getNextEvent(now);
+            
+            if (nextEvent) {
+                const diff = nextEvent.time - now;
+                const hours = Math.floor(diff / 3600000);
+                const minutes = Math.floor((diff % 3600000) / 60000);
+                const seconds = Math.floor((diff % 60000) / 1000);
+                
+                this.countdownTimer.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                this.nextPrayer.textContent = this.prayerNames.bn[this.prayerKeys.indexOf(nextEvent.key)];
+                
+                // বর্তমান ওয়াক্ত হাইলাইট
+                this.highlightCurrentPrayer(now);
+                
+                // আযান চেক (শুধু মিনিটের শুরুতে)
+                if (seconds === 0 && minutes === 0) {
+                    this.checkAdhanTrigger(now, nextEvent.key);
+                }
+            }
+        }, 1000);
+    }
+
+    // পরবর্তী ওয়াক্ত বের করা
+    getNextEvent(now) {
+        const events = this.prayerKeys.map(key => ({
+            key,
+            time: this.timeToDate(this.timings[key])
+        })).sort((a, b) => a.time - b.time);
+        
+        return events.find(e => e.time > now) || events[0];
+    }
+
+    // টাইম স্ট্রিংকে ডেটে রূপান্তর
+    timeToDate(timeStr) {
         const [h, m] = timeStr.split(':').map(Number);
         const d = new Date();
         d.setHours(h, m, 0, 0);
         return d;
     }
 
-    function getNextEvent(now, timingsObj) {
-        const events = [];
-        PRAYER_KEYS.forEach(key => {
-            if (timingsObj[key]) {
-                const eventTime = timeStrToDate(timingsObj[key]);
-                events.push({ key, time: eventTime });
-            }
-        });
-        events.sort((a,b) => a.time - b.time);
-        let next = null;
-        for (let e of events) {
-            if (e.time > now) {
-                next = e;
-                break;
-            }
-        }
-        if (!next && events.length) {
-            const first = events[0];
-            const tomorrow = new Date(first.time);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            next = { key: first.key, time: tomorrow };
-        }
-        return next;
-    }
-
-    function refreshCountdownAndHighlights() {
-        if (!timings) return;
-        const now = new Date();
-        const next = getNextEvent(now, timings);
-        if (!next) return;
-
-        const diffMs = next.time - now;
-        const diffSec = Math.floor(diffMs / 1000);
-        const hours = Math.floor(diffSec / 3600);
-        const minutes = Math.floor((diffSec % 3600) / 60);
-        const seconds = diffSec % 60;
-
-        if (diffSec <= 0) {
-            elCountdown.innerText = LABELS[currentLang].justNow || '00:00:00';
-        } else {
-            elCountdown.innerText = `${twoDigits(hours)}:${twoDigits(minutes)}:${twoDigits(seconds)}`;
-        }
-
-        const idx = PRAYER_KEYS.indexOf(next.key);
-        elNextName.innerText = idx !== -1 ? PRAYER_NAMES[currentLang][idx] : next.key;
-
-        const nowMins = now.getHours() * 60 + now.getMinutes();
+    // বর্তমান ওয়াক্ত হাইলাইট
+    highlightCurrentPrayer(now) {
+        const currentHour = now.getHours();
+        const currentMin = now.getMinutes();
+        const currentTotal = currentHour * 60 + currentMin;
+        
         let currentKey = null;
-        for (let i = PRAYER_KEYS.length-1; i>=0; i--) {
-            const key = PRAYER_KEYS[i];
-            if (!timings[key]) continue;
-            const [h,m] = timings[key].split(':').map(Number);
-            if (h*60+m <= nowMins) {
+        for (let i = this.prayerKeys.length - 1; i >= 0; i--) {
+            const key = this.prayerKeys[i];
+            const [h, m] = this.timings[key].split(':').map(Number);
+            if (h * 60 + m <= currentTotal) {
                 currentKey = key;
                 break;
             }
         }
+        
         document.querySelectorAll('.prayer-item').forEach(item => {
-            const pKey = item.dataset.prayerKey;
-            if (pKey === currentKey) item.classList.add('current');
-            else item.classList.remove('current');
+            const key = item.dataset.prayer;
+            item.classList.toggle('current', key === currentKey);
         });
+    }
 
-        const nowHour = now.getHours();
-        const nowMin = now.getMinutes();
-        const nowSec = now.getSeconds();
-        if (nowSec < 2 && timings) {
-            for (let key of PRAYER_KEYS) {
-                if (!timings[key]) continue;
-                const [h,m] = timings[key].split(':').map(Number);
-                if (h === nowHour && m === nowMin) {
-                    const todayStr = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-                    if (activeAdhanPrayer !== key + todayStr) {
-                        adhanAudio.currentTime = 0;
-                        adhanAudio.play().catch(e => console.log('play error', e));
-                        activeAdhanPrayer = key + todayStr;
-                    }
-                    break;
-                }
-            }
+    // আযান ট্রিগার চেক
+    checkAdhanTrigger(now, nextKey) {
+        const today = now.toDateString();
+        if (this.activeAdhan !== nextKey + today) {
+            this.playAdhan();
+            this.activeAdhan = nextKey + today;
         }
     }
+}
 
-    function renderPrayerGrid() {
-        if (!timings) return;
-        let html = '';
-        PRAYER_KEYS.forEach((key, i) => {
-            const time24 = timings[key] || '--:--';
-            const time12 = format12Hour(time24);
-            const name = PRAYER_NAMES[currentLang][i];
-            html += `
-                <div class="prayer-item" data-prayer-key="${key}">
-                    <div class="prayer-name">${name}</div>
-                    <div class="prayer-time">${time12}</div>
-                    <button class="prayer-adhan" data-key="${key}">🔊 ${LABELS[currentLang].adhanBtn}</button>
-                </div>
-            `;
-        });
-        prayerGrid.innerHTML = html;
-
-        document.querySelectorAll('.prayer-adhan').forEach(btn => {
-            btn.addEventListener('click', () => {
-                adhanAudio.currentTime = 0;
-                adhanAudio.play().catch(() => {});
-            });
-        });
-    }
-
-    function refreshLanguage() {
-        elNextLabel.innerText = LABELS[currentLang].next;
-        elSehriLabel.innerText = LABELS[currentLang].sehri;
-        elIftarLabel.innerText = LABELS[currentLang].iftar;
-        elSehriNote.innerText = LABELS[currentLang].sehriNote;
-        elIftarNote.innerText = LABELS[currentLang].iftarNote;
-        renderPrayerGrid();
-
-        if (timings) {
-            const now = new Date();
-            const next = getNextEvent(now, timings);
-            if (next) {
-                const idx = PRAYER_KEYS.indexOf(next.key);
-                elNextName.innerText = idx !== -1 ? PRAYER_NAMES[currentLang][idx] : next.key;
-            }
-        }
-
-        langBtns.forEach(btn => {
-            const lang = btn.dataset.lang;
-            if (lang === currentLang) btn.classList.add('active');
-            else btn.classList.remove('active');
-        });
-    }
-
-    async function fetchTimings(division) {
-        const address = `${division}, Bangladesh`;
-        const url = `https://api.aladhan.com/v1/timingsByAddress?address=${encodeURIComponent(address)}&method=1`;
-
-        try {
-            const resp = await fetch(url);
-            const data = await resp.json();
-            if (data.code === 200 && data.data) {
-                timings = data.data.timings;
-                const greg = data.data.date.gregorian;
-                const hijri = data.data.date.hijri;
-                elGregorian.innerText = greg.date;
-                elHijri.innerText = `${hijri.day} ${hijri.month.en} ${hijri.year} AH`;
-
-                elSehriTime.innerText = format12Hour(timings.Fajr);
-                elIftarTime.innerText = format12Hour(timings.Maghrib);
-
-                elLocationName.innerText = division;
-
-                renderPrayerGrid();
-                refreshCountdownAndHighlights();
-
-                const today = new Date();
-                const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
-                if (lastCheckedDate !== todayStr) {
-                    activeAdhanPrayer = null;
-                    lastCheckedDate = todayStr;
-                }
-            }
-        } catch (err) {
-            console.warn('API fetch failed, using fallback data for', division);
-            timings = {
-                Fajr: '04:45', Sunrise: '06:03', Dhuhr: '12:02',
-                Asr: '15:26', Maghrib: '18:01', Isha: '19:20'
-            };
-            elGregorian.innerText = '14-03-2026';
-            elHijri.innerText = '25 Ramadan 1447 AH';
-            elSehriTime.innerText = format12Hour('04:45');
-            elIftarTime.innerText = format12Hour('18:01');
-            elLocationName.innerText = division;
-            renderPrayerGrid();
-        }
-    }
-
-    async function init() {
-        divisionSelect.value = currentDivision;
-        await fetchTimings(currentDivision);
-
-        divisionSelect.addEventListener('change', async (e) => {
-            currentDivision = e.target.value;
-            await fetchTimings(currentDivision);
-        });
-
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const lang = e.target.dataset.lang;
-                if (lang) {
-                    currentLang = lang;
-                    refreshLanguage();
-                }
-            });
-        });
-
-        setInterval(() => {
-            updateLiveClock12();
-            if (timings) {
-                refreshCountdownAndHighlights();
-            }
-        }, 1000);
-
-        setInterval(() => {
-            fetchTimings(currentDivision);
-        }, 30 * 60 * 1000);
-    }
-
-    init();
-})();
+// ক্যালেন্ডার শুরু করা
+document.addEventListener('DOMContentLoaded', () => {
+    new RamadanCalendar();
+});
