@@ -1,15 +1,4 @@
-/* Minimal CSS with Azan Support */
-:root {
-  --bg: #f5f7fa;
-  --card: #ffffff;
-  --text: #1a2634;
-  --text-light: #4a5568;
-  --accent: #1e6f9f;
-  --success: #27ae60;
-  --danger: #e74c3c;
-  --border: #e2e8f0;
-}
-
+/* ===== RESET & VARIABLES ===== */
 * {
   margin: 0;
   padding: 0;
@@ -17,35 +6,40 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --accent: #0f5b8c;
+  --accent-light: #e6f0fa;
+  --success: #059669;
+  --border: #e2e8f0;
+  --shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
 body {
   background: var(--bg);
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 12px;
+  padding: 16px;
   color: var(--text);
 }
 
-.container {
-  max-width: 500px;
-  width: 100%;
-  background: var(--card);
-  border-radius: 40px;
-  padding: 24px 20px;
-  border: 1px solid var(--border);
-}
-
-/* Header */
+/* ===== HEADER ===== */
 .header {
-  margin-bottom: 24px;
-  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 16px;
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 12px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .logo span {
@@ -53,52 +47,75 @@ body {
 }
 
 .current-time {
-  font-size: 2.2rem;
+  font-size: 32px;
   font-weight: 600;
   color: var(--accent);
+  background: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
-/* Location */
+/* ===== MAIN CONTAINER ===== */
+.container {
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  border-radius: 32px;
+  padding: 24px 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* ===== LOCATION SELECTOR ===== */
 .location-section {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .division-select {
   width: 100%;
   padding: 14px 18px;
   border: 1px solid var(--border);
-  border-radius: 50px;
-  background: var(--card);
-  font-size: 1rem;
+  border-radius: 40px;
+  background: white;
+  font-size: 16px;
   color: var(--text);
   outline: none;
   cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f5b8c' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 18px;
 }
 
-/* Azan Status */
+/* ===== AZAN STATUS ===== */
 .azan-status {
   text-align: center;
-  padding: 10px;
-  margin-bottom: 16px;
-  border-radius: 50px;
-  font-size: 0.95rem;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 500;
   background: var(--accent);
   color: white;
-  font-weight: 500;
+  transition: all 0.3s;
 }
 
 .azan-status.playing {
   background: var(--success);
-  animation: pulse 1s infinite;
+  animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
   0% { opacity: 1; }
-  50% { opacity: 0.8; }
+  50% { opacity: 0.8; transform: scale(1.02); }
   100% { opacity: 1; }
 }
 
-/* Countdown Card */
+/* ===== COUNTDOWN CARD ===== */
 .countdown-card {
   background: var(--accent);
   border-radius: 40px;
@@ -109,46 +126,55 @@ body {
 }
 
 .countdown-timer {
-  font-size: 3.5rem;
+  font-size: 48px;
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 8px;
 }
 
 .countdown-event {
-  font-size: 1.8rem;
+  font-size: 26px;
   font-weight: 600;
 }
 
-/* Time Cards */
+/* ===== TIME CARDS ===== */
 .row {
   display: flex;
   gap: 12px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .time-card {
   flex: 1;
-  background: var(--card);
-  border-radius: 30px;
+  background: white;
+  border-radius: 28px;
   padding: 20px 8px;
   text-align: center;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
 
 .time-card-title {
-  font-size: 1.1rem;
+  font-size: 16px;
   color: var(--text-light);
   margin-bottom: 8px;
 }
 
 .time-card-value {
-  font-size: 2rem;
+  font-size: 28px;
   font-weight: 700;
   color: var(--accent);
 }
 
-/* Prayer Grid */
+/* ===== SECTION TITLES ===== */
+.section-title {
+  font-size: 22px;
+  text-align: center;
+  margin: 24px 0 16px;
+  color: var(--text);
+}
+
+/* ===== PRAYER GRID ===== */
 .prayer-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -157,12 +183,12 @@ body {
 }
 
 .prayer-item {
-  background: var(--card);
-  border-radius: 25px;
-  padding: 16px 8px;
+  background: white;
+  border-radius: 24px;
+  padding: 18px 8px;
   text-align: center;
   border: 1px solid var(--border);
-  position: relative;
+  box-shadow: var(--shadow);
   transition: all 0.2s;
 }
 
@@ -170,10 +196,9 @@ body {
   background: var(--accent);
   color: white;
   transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(30,111,159,0.3);
 }
 
-.prayer-item.azan-active {
+.prayer-item.azan-playing {
   background: var(--success);
   color: white;
   animation: glow 1.5s infinite;
@@ -186,95 +211,107 @@ body {
 }
 
 .prayer-name {
-  font-size: 1.2rem;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .prayer-time {
-  font-size: 1.4rem;
+  font-size: 20px;
   font-weight: 700;
   color: var(--accent);
-  margin: 4px 0;
+  margin: 6px 0;
 }
 
 .prayer-item.next-prayer .prayer-time,
-.prayer-item.azan-active .prayer-time {
+.prayer-item.azan-playing .prayer-time {
   color: white;
 }
 
 .prayer-countdown {
-  font-size: 0.9rem;
+  font-size: 14px;
   color: var(--text-light);
-  margin-top: 6px;
 }
 
-.prayer-item.next-prayer .prayer-countdown,
-.prayer-item.azan-active .prayer-countdown {
-  color: rgba(255,255,255,0.9);
-}
-
-.azan-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: var(--danger);
-  color: white;
-  font-size: 0.7rem;
-  padding: 4px 8px;
-  border-radius: 20px;
-  font-weight: bold;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-/* Azan Control */
+/* ===== AZAN CONTROL ===== */
 .azan-control {
-  margin: 20px 0;
+  margin: 24px 0 16px;
   text-align: center;
 }
 
 .azan-toggle-btn {
+  width: 100%;
+  padding: 16px;
   background: var(--accent);
   color: white;
   border: none;
-  border-radius: 50px;
-  padding: 14px 30px;
-  font-size: 1.1rem;
+  border-radius: 40px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  width: 100%;
   transition: all 0.2s;
 }
 
 .azan-toggle-btn.off {
-  background: var(--danger);
-  opacity: 0.8;
+  background: var(--text-light);
 }
 
-.azan-toggle-btn:active {
-  transform: scale(0.98);
-}
-
-/* Footer */
-.footer-note {
-  text-align: center;
-  margin-top: 20px;
+.azan-note {
+  font-size: 13px;
   color: var(--text-light);
-  font-size: 0.85rem;
+  margin-top: 10px;
+  text-align: center;
 }
 
-/* Responsive */
+/* ===== DUA CARDS ===== */
+.dua-card {
+  background: var(--accent-light);
+  border-radius: 24px;
+  padding: 20px 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+
+.dua-arabic {
+  font-size: 22px;
+  font-family: 'Traditional Arabic', 'Amiri', serif;
+  text-align: right;
+  margin-bottom: 12px;
+  color: var(--accent);
+  direction: rtl;
+}
+
+.dua-meaning {
+  font-size: 16px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 16px;
+  text-align: center;
+  padding: 16px;
+  background: white;
+  border-radius: 32px;
+  border: 1px solid var(--border);
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
-  .container { padding: 20px 16px; }
-  .current-time { font-size: 1.8rem; }
-  .countdown-timer { font-size: 2.8rem; }
-  .countdown-event { font-size: 1.5rem; }
-  .time-card-value { font-size: 1.6rem; }
+  .current-time { font-size: 26px; }
+  .countdown-timer { font-size: 40px; }
+  .countdown-event { font-size: 22px; }
+  .row { flex-direction: column; }
   .prayer-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 350px) {
+  .current-time { font-size: 22px; }
+  .countdown-timer { font-size: 32px; }
+  .time-card-value { font-size: 24px; }
 }

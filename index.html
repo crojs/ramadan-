@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>রমাদানTy - আজান সহ রমজান ক্যালেন্ডার</title>
+  <title>রমাদানTy - রমজান ক্যালেন্ডার ২০২৬</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <div class="logo">রমাদান<span>Ty</span></div>
-      <div class="current-time" id="digitalClock">--:--:-- --</div>
-    </div>
+  <header class="header">
+    <div class="logo">রমাদান<span>Ty</span></div>
+    <div class="current-time" id="digitalClock">--:--:-- --</div>
+  </header>
 
-    <!-- Location -->
-    <div class="location-section">
+  <main class="container">
+    <!-- Location Selector -->
+    <nav class="location-section">
       <select id="division" class="division-select">
         <option value="Dhaka">ঢাকা</option>
         <option value="Chittagong">চট্টগ্রাম</option>
@@ -26,10 +25,10 @@
         <option value="Rangpur">রংপুর</option>
         <option value="Mymensingh">ময়মনসিংহ</option>
       </select>
-    </div>
+    </nav>
 
-    <!-- Azan Status -->
-    <div class="azan-status" id="azanStatus">আজান সক্রিয়</div>
+    <!-- Azan Status - Shows when Azan is playing -->
+    <div class="azan-status" id="azanStatus">🎵 আজান সক্রিয়</div>
 
     <!-- Main Countdown -->
     <div class="countdown-card">
@@ -40,39 +39,57 @@
     <!-- Sehri & Iftar -->
     <div class="row">
       <div class="time-card">
-        <div class="time-card-title">সেহরি শেষ</div>
+        <h3 class="time-card-title">সেহরি শেষ</h3>
         <div class="time-card-value" id="sehriTime">--:--</div>
       </div>
       <div class="time-card">
-        <div class="time-card-title">ইফতার</div>
+        <h3 class="time-card-title">ইফতার</h3>
         <div class="time-card-value" id="iftarTime">--:--</div>
       </div>
     </div>
 
-    <!-- Prayer Times with Azan Indicators -->
+    <!-- Prayer Times -->
+    <h2 class="section-title">পাঁচ ওয়াক্ত নামাজ</h2>
     <div class="prayer-grid" id="prayerTimesGrid"></div>
 
-    <!-- Azan Control -->
+    <!-- Azan Control - Only ON/OFF button, no test buttons -->
     <div class="azan-control">
-      <button class="azan-toggle-btn" id="toggleAzan">আজান চালু</button>
+      <button class="azan-toggle-btn" id="toggleAzan">🔊 আজান চালু</button>
+      <p class="azan-note">নির্দিষ্ট সময়ে স্বয়ংক্রিয়ভাবে আজান বাজবে</p>
     </div>
 
-    <!-- Audio for Adhan - Multiple sources for reliability -->
-    <audio id="adhanAudio" preload="auto">
+    <!-- Duas -->
+    <h2 class="section-title">রমজানের দোয়া</h2>
+    <div class="dua-card">
+      <div class="dua-arabic">وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ</div>
+      <div class="dua-meaning">সেহরির নিয়ত</div>
+    </div>
+    <div class="dua-card">
+      <div class="dua-arabic">اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</div>
+      <div class="dua-meaning">ইফতারের দোয়া</div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© ২০২৬ রমাদানTy | বাংলাদেশ সময় | স্বয়ংক্রিয় আজান</p>
+  </footer>
+
+  <!-- Multiple Audio Sources for Redundancy (Hidden) -->
+  <div style="display: none;">
+    <audio id="adhanAudio1" preload="auto" loop="false">
       <source src="https://www.islamcan.com/audio/adhan/azan1.mp3" type="audio/mpeg">
       <source src="https://www.islamcan.com/audio/adhan/azan1.ogg" type="audio/ogg">
-      <source src="https://download.quranicaudio.com/qad/adan_makkah.mp3" type="audio/mpeg">
     </audio>
-
-    <!-- Fallback Audio for reliability -->
-    <audio id="adhanFallbackAudio" preload="auto" style="display:none">
-      <source src="https://www.islamcan.com/audio/adhan/azan1.mp3" type="audio/mpeg">
+    <audio id="adhanAudio2" preload="auto" loop="false">
+      <source src="https://cdn.islamic.network/athan/athan-v1.mp3" type="audio/mpeg">
     </audio>
-
-    <div class="footer-note">
-      <p>বাংলাদেশ সময় | পাঁচ ওয়াক্ত আজান</p>
-    </div>
+    <audio id="adhanAudio3" preload="auto" loop="false">
+      <source src="https://www.islamcan.com/audio/adhan/azan2.mp3" type="audio/mpeg">
+    </audio>
   </div>
+
+  <!-- Hidden audio for user interaction unlock -->
+  <audio id="unlockAudio" preload="auto" style="display:none;"></audio>
 
   <script src="script.js"></script>
 </body>
